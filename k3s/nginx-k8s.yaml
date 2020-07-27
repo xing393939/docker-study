@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-nginx
-  namespace: default
+  namespace: kube-system
   labels:
     app: my-nginx
 spec:
@@ -27,7 +27,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: my-nginx
-  namespace: default
+  namespace: kube-system
   labels:
     app: my-nginx
 spec:

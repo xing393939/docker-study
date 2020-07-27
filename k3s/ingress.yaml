@@ -7,8 +7,14 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - http:
+  - host: tool.ivu1314.com
+    http:
       paths:
-      - backend:
+      - path: /dashboard/
+        backend:
+          serviceName: traefik
+          servicePort: dash
+      - path: /nginx/
+        backend:
           serviceName: my-nginx
-          servicePort: 80
+          servicePort: http

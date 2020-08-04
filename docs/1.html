@@ -217,6 +217,14 @@ kubectl get node --kubeconfig=/etc/kubernetes/kubeconfig/kubelet.kubeconfig
 kubectl get node --kubeconfig=./kubeconfig --context=cluster1-context
 </code></pre></li>
 </ol>
+<h4 id="&#x5982;&#x4F55;&#x5224;&#x65AD;&#x5BB9;&#x5668;&#x73AF;&#x5883;&#x662F;docker&#x8FD8;&#x662F;lxc">&#x5982;&#x4F55;&#x5224;&#x65AD;&#x5BB9;&#x5668;&#x73AF;&#x5883;&#x662F;docker&#x8FD8;&#x662F;lxc</h4>
+<ol>
+<li><a href="http://dockone.io/question/171" target="_blank">&#x5982;&#x4F55;&#x68C0;&#x6D4B;&#x8BE5;&#x670D;&#x52A1;&#x5668;&#x4F7F;&#x7528;&#x7684;&#x662F;Container&#x6280;&#x672F;&#x8FD8;&#x662F;VM&#x6280;&#x672F;</a></li>
+<li>docker &#x5982;&#x4F55;&#x8FDB;&#x5165;&#x5BB9;&#x5668;&#xFF1A;docker exec -it &#x5BB9;&#x5668;id /bin/bash</li>
+<li>kubectl &#x5982;&#x4F55;&#x8FDB;&#x5165;pod&#xFF1A;kubectl exec -it {pod id} -- /bin/bash</li>
+<li>cat /proc/1/cgroup # &#x5982;&#x679C;&#x5305;&#x542B;docker&#x6216;&#x8005;kubepods&#x5C31;&#x662F;docker</li>
+<li>ls /.dockerenv     # &#x5982;&#x679C;&#x6709;&#x5C31;&#x662F;docker</li>
+</ol>
 
                                 
                                 </section>
@@ -256,7 +264,7 @@ kubectl get node --kubeconfig=./kubeconfig --context=cluster1-context
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.k3s 入门","level":"1.2","depth":1,"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/1.md","mtime":"2020-08-04T00:37:51.113Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-04T00:38:19.527Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.k3s 入门","level":"1.2","depth":1,"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/1.md","mtime":"2020-08-04T01:10:30.320Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-04T01:11:00.550Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

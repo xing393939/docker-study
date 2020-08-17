@@ -1,4 +1,5 @@
 FROM python:3.6.1-alpine
+RUN apk upgrade --update-cache --available && apk add openssl
 WORKDIR /project
 ADD . /project
 RUN pip install -r requirements.txt

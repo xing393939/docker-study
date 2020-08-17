@@ -31,12 +31,12 @@ def genkey():
 	name = "CN={0}, OU={0}{1}, O={2}, L={3}, ST={4}, C=US".format(
 		ranstr(3), ranstr(3), ranstr(5), L, random.choice(list(US_CITIES[L])))
 
-	common = 'keytool -genkey -alias %s -keypass %s -storepass %s -dname "%s" -keyalg RSA -validity 2000000 -keystore %s' % (
+	common = '/usr/bin/keytool -genkey -alias %s -keypass %s -storepass %s -dname "%s" -keyalg RSA -validity 2000000 -keystore %s' % (
 		alias, keypass, keypass, name, keystore)
 	info = subprocess.Popen(
 		common, shell=True, stdout=subprocess.PIPE,
 		stderr=subprocess.STDOUT).communicate()
-	common = 'keytool -exportcert -alias %s -keystore "%s" -storepass %s | /usr/bin/openssl sha1 -binary | /usr/bin/openssl base64' % (
+	common = '/usr/bin/keytool -exportcert -alias %s -keystore "%s" -storepass %s | /usr/bin/openssl sha1 -binary | /usr/bin/openssl base64' % (
 		alias, keystore, keypass)
 	info = subprocess.Popen(
 		common, shell=True, stdout=subprocess.PIPE,

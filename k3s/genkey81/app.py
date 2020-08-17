@@ -3,7 +3,6 @@ import os
 import time
 import json
 import random
-import requests
 import subprocess
 
 app = Flask(__name__)

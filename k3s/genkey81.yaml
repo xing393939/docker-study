@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-genkey
+  namespace: kube-system
+  labels:
+    app: pod-genkey
+spec:
+  selector:
+    matchLabels:
+      app: pod-genkey
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pod-genkey
+    spec:
+      containers:
+        - image: registry.cn-qingdao.aliyuncs.com/qinhan/simida:genkey81
+          name: pod-genkey
+          ports:
+            - containerPort: 81
+              name: 'pod-genkey'
+              protocol: 'TCP'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-genkey
+  namespace: kube-system
+  labels:
+    app: service-genkey
+spec:
+  ports:
+    - name: http
+      port: 81
+      protocol: TCP
+      targetPort: 81
+  selector:
+    app: pod-genkey

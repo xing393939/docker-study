@@ -14,7 +14,6 @@ def ranstr(num):
 		salt += random.choice(H)
 	return salt
 
-
 @app.route('/')
 def index():
 	return '''
@@ -26,6 +25,8 @@ def genkey():
 	alias = ranstr(3)
 	keypass = str(time.time())
 	keystore = "static/k%s.jks" % time.strftime('%Y%m%d%M%I%S')
+	if not os.path.isdir('static'):
+	    os.makedirs('static')
 
 	L = random.choice(list(US_CITIES))
 	name = "CN={0}, OU={0}{1}, O={2}, L={3}, ST={4}, C=US".format(

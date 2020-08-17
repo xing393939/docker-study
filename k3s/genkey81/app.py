@@ -36,7 +36,7 @@ def genkey():
 	info = subprocess.Popen(
 		common, shell=True, stdout=subprocess.PIPE,
 		stderr=subprocess.STDOUT).communicate()
-	common = 'keytool -exportcert -alias %s -keystore "%s" -storepass %s | openssl sha1 -binary | openssl base64' % (
+	common = 'keytool -exportcert -alias %s -keystore "%s" -storepass %s | /usr/bin/openssl sha1 -binary | /usr/bin/openssl base64' % (
 		alias, keystore, keypass)
 	info = subprocess.Popen(
 		common, shell=True, stdout=subprocess.PIPE,

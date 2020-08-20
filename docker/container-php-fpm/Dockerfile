@@ -1,12 +1,8 @@
 FROM php:5.6-fpm-alpine
 COPY src/ /code/
 
-RUN mkdir /etc/apt \
-&& echo 'deb http://mirrors.aliyun.com/debian/ buster main non-free contrib' > /etc/apt/sources.list \
-&& echo 'deb http://mirrors.aliyun.com/debian-security buster/updates main' >> /etc/apt/sources.list \
-&& echo 'deb http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib' >> /etc/apt/sources.list \
-&& echo 'deb http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib' >> /etc/apt/sources.list \
-&& apt-get update
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+&& apk update
 
 # OPcache defaults
 RUN docker-php-ext-configure opcache --enable-opcache && docker-php-ext-install opcache

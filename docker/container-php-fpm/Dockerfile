@@ -8,6 +8,11 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 # timezone
 RUN printf '[PHP]\ndate.timezone = "Asia/Shanghai"\n' > /usr/local/etc/php/conf.d/timezone.ini
 
+# redis
+RUN apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS \
+    && pecl install -o -f redis-3.1.2  \
+    && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
+
 # gd
 RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
 docker-php-ext-configure gd \
@@ -17,9 +22,6 @@ docker-php-ext-configure gd \
 --with-jpeg-dir=/usr/include/ && \
 NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
 docker-php-ext-install -j${NPROC} gd
-
-# redis
-RUN pecl install redis-5.0.0 && docker-php-ext-enable redis
 
 # OPcache defaults
 RUN docker-php-ext-configure opcache --enable-opcache && docker-php-ext-install opcache

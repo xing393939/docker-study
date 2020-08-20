@@ -196,12 +196,19 @@
 </ol>
 <h4 id="nginxfpm">nginx+fpm</h4>
 <ol>
-<li>docker build -t image-nginx .</li>
-<li>docker run --name container-nginx -p 70:70 -d image-nginx</li>
 <li>docker build -t image-php-fpm .</li>
 <li>docker run --name container-php-fpm -p 9000:9000 -d image-php-fpm</li>
+<li>docker build -t image-nginx .</li>
+<li>docker run --name container-nginx -p 70:70 --link container-php-fpm:localhost -d image-nginx</li>
 </ol>
-
+<h4 id="&#x5BB9;&#x5668;&#x5185;&#x5B89;&#x88C5;telnet&#x7B49;">&#x5BB9;&#x5668;&#x5185;&#x5B89;&#x88C5;telnet&#x7B49;</h4>
+<pre><code>echo &apos;deb http://mirrors.aliyun.com/debian/ buster main non-free contrib&apos; &gt; /etc/apt/sources.list \
+&amp;&amp; echo &apos;deb http://mirrors.aliyun.com/debian-security buster/updates main&apos; &gt;&gt; /etc/apt/sources.list \
+&amp;&amp; echo &apos;deb http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib&apos; &gt;&gt; /etc/apt/sources.list \
+&amp;&amp; echo &apos;deb http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib&apos; &gt;&gt; /etc/apt/sources.list \
+&amp;&amp; apt-get update \
+&amp;&amp; apt-get install telnet
+</code></pre>
                                 
                                 </section>
                             
@@ -240,7 +247,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.docker相关","level":"1.4","depth":1,"previous":{"title":"1.《Kubernetes in Action》","level":"1.3","depth":1,"path":"docs/2.md","ref":"docs/2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/3.md","mtime":"2020-08-20T02:41:03.900Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-20T02:41:31.321Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.docker相关","level":"1.4","depth":1,"previous":{"title":"1.《Kubernetes in Action》","level":"1.3","depth":1,"path":"docs/2.md","ref":"docs/2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/3.md","mtime":"2020-08-20T03:16:49.633Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-20T03:17:16.590Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

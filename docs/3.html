@@ -198,18 +198,18 @@
 <ol>
 <li>docker build -t image-php-fpm .</li>
 <li>docker run --name container-php-fpm -p 9000:9000 -d image-php-fpm</li>
-<li>docker build -t image-nginx .</li>
-<li>docker run --name container-nginx -p 70:70 --link container-php-fpm:localhost -d image-nginx</li>
+<li>docker build -t image-ng .</li>
+<li>docker run --name container-ng -p 70:70 --link container-php-fpm:localhost -d image-ng</li>
 <li><hr>
 </li>
 <li>docker build -t image-php-fpm70 .</li>
-<li>docker run --name container-php-fpm70 -p 9000:9000 -d image-php-fpm70</li>
-<li>docker build -t image-nginx70 .</li>
-<li>docker run --name container-nginx70 -p 70:70 --link container-php-fpm70:localhost -d image-nginx70</li>
+<li>docker run --network subnet01 --name container-php-fpm70 -p 9000:9000 -d image-php-fpm70</li>
+<li>docker build -t image-ng70 .</li>
+<li>docker run --network subnet01 --name container-ng70 -p 70:70 -d image-ng70</li>
 <li><hr>
 </li>
-<li>docker build -t image-nginx7172 .</li>
-<li>docker run --name container-nginx7172 -p 71:71 --link -d image-nginx7172</li>
+<li>docker build -t image-ng7172 .</li>
+<li>docker run --network subnet01 --name container-ng7172 -p 71:71 --link -d image-ng7172</li>
 </ol>
 <h4 id="docker&#x5BB9;&#x5668;&#x8BBF;&#x95EE;&#x5BBF;&#x4E3B;&#x673A;&#x670D;&#x52A1;">docker&#x5BB9;&#x5668;&#x8BBF;&#x95EE;&#x5BBF;&#x4E3B;&#x673A;&#x670D;&#x52A1;</h4>
 <ol>
@@ -221,8 +221,8 @@
 ```
 docker network ls
 docker network create --subnet=172.18.0.1/24 subnet01
-docker run --name=container-nginx7172 --network subnet01 -d image-nginx7172
-docker run --name=test --network subnet01 -d nginx</li>
+docker run --name=container-nginx1 --network subnet01 -d image-nginx1
+docker run --name=container-nginx2 --network subnet01 -d image-nginx2</li>
 </ol>
 <p>docker network create -d bridge my_bridge
 docker network connect my_bridge container-db
@@ -281,7 +281,7 @@ apk add busybox-extras
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.docker相关","level":"1.4","depth":1,"previous":{"title":"1.《Kubernetes in Action》","level":"1.3","depth":1,"path":"docs/2.md","ref":"docs/2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/3.md","mtime":"2020-08-20T11:39:05.097Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-20T11:39:30.214Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.docker相关","level":"1.4","depth":1,"previous":{"title":"1.《Kubernetes in Action》","level":"1.3","depth":1,"path":"docs/2.md","ref":"docs/2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/3.md","mtime":"2020-08-20T11:48:41.759Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-20T11:49:08.245Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

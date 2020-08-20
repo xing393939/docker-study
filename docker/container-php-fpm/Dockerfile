@@ -1,8 +1,15 @@
 FROM php:5.6-fpm-alpine
 COPY src/ /code/
 
+RUN export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" \
+&& echo 'deb http://mirrors.aliyun.com/debian/ buster main non-free contrib' > /etc/apt/sources.list \
+&& echo 'deb http://mirrors.aliyun.com/debian-security buster/updates main' >> /etc/apt/sources.list \
+&& echo 'deb http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib' >> /etc/apt/sources.list \
+&& echo 'deb http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib' >> /etc/apt/sources.list \
+&& apt-get update
+
 # OPcache defaults
-RUN docker-php-ext-install opcache
+RUN docker-php-ext-configure opcache --enable-opcache && docker-php-ext-install opcache
 ENV PHP_OPCACHE_ENABLE="1"
 ENV PHP_OPCACHE_MEMORY_CONSUMPTION="128"
 ENV PHP_OPCACHE_MAX_ACCELERATED_FILES="10000"

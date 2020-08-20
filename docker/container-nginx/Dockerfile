@@ -1,5 +1,5 @@
 FROM nginx
 COPY src/ /code/
 COPY default.conf /etc/nginx/conf.d/default.conf
-ENTRYPOINT ["/usr/sbin/nginx"]
+
 EXPOSE 70

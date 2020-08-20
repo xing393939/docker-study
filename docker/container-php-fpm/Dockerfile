@@ -19,7 +19,7 @@ NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
 docker-php-ext-install -j${NPROC} gd
 
 # redis
-RUN pecl install redis && docker-php-ext-enable redis
+RUN pecl install redis-5.0.0 && docker-php-ext-enable redis
 
 # OPcache defaults
 RUN docker-php-ext-configure opcache --enable-opcache && docker-php-ext-install opcache

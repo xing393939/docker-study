@@ -1,5 +1,6 @@
-FROM nginx
+FROM php:5.6-fpm-alpine
 COPY src/ /code/
 COPY default.conf /etc/nginx/conf.d/default.conf
-ENTRYPOINT ["/usr/sbin/nginx"]
-EXPOSE 70
+
+EXPOSE 7000
+

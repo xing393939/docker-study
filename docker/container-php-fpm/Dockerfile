@@ -9,7 +9,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 RUN printf '[PHP]\ndate.timezone = "Asia/Shanghai"\n' > /usr/local/etc/php/conf.d/timezone.ini
 
 # redis
-apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS \
+RUN apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS \
     && pecl install -o -f redis-3.1.2  \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 

@@ -206,28 +206,43 @@
 <li>docker run --name container-php-fpm70 -p 9000:9000 -d image-php-fpm70</li>
 <li>docker build -t image-nginx70 .</li>
 <li>docker run --name container-nginx70 -p 70:70 --link container-php-fpm70:localhost -d image-nginx70</li>
+<li><hr>
+</li>
+<li>docker build -t image-nginx7172 .</li>
+<li>docker run --name container-nginx7172 -p 71:71 --link -d image-nginx7172</li>
 </ol>
 <h4 id="docker&#x5BB9;&#x5668;&#x8BBF;&#x95EE;&#x5BBF;&#x4E3B;&#x673A;&#x670D;&#x52A1;">docker&#x5BB9;&#x5668;&#x8BBF;&#x95EE;&#x5BBF;&#x4E3B;&#x673A;&#x670D;&#x52A1;</h4>
 <ol>
 <li><a href="https://blog.csdn.net/qq_38403662/article/details/102555888" target="_blank">docker&#x5BB9;&#x5668;&#x8BBF;&#x95EE;&#x5BBF;&#x4E3B;&#x673A;&#x670D;&#x52A1;</a></li>
+<li><a href="https://www.cnblogs.com/zouzou-busy/p/12148825.html" target="_blank">Docker&#x5BB9;&#x5668;&#x95F4;&#x5229;&#x7528;bridge&#x7F51;&#x6865;&#x5B9E;&#x73B0;&#x53CC;&#x5411;&#x901A;&#x4FE1;</a></li>
 <li>host&#x6A21;&#x5F0F;&#xFF0C;--network host</li>
 <li>Dockerfile &#x6DFB;&#x52A0;&#xFF1A;ip -4 route list match 0/0 | awk &#x2018;{print $3 &#x201C;host.docker.internal&#x201D;}&#x2019; &gt;&gt; /etc/hosts</li>
+<li>bridge&#x6A21;&#x5F0F;&#xFF0C;&#x5904;&#x4E8E;&#x540C;&#x4E00;&#x4E2A;network&#xFF1A;
+```
+docker network ls
+docker network create --subnet=172.18.0.1/24 subnet01
+docker run --name=container-nginx7172 --network subnet01 -d image-nginx7172
+docker run --name=test --network subnet01 -d nginx</li>
 </ol>
-<h4 id="dockerfile&#x547D;&#x4EE4;">Dockerfile&#x547D;&#x4EE4;</h4>
-<ol>
-<li>ENTRYPOINT &#x548C; CMD</li>
-<li>COPY &#x548C; ADD</li>
-<li>WORKDIR &#x548C; cd&#xFF1A;cd &#x53EA;&#x5BF9;&#x5F53;&#x524D;&#x884C;&#x547D;&#x4EE4;&#x6709;&#x6548;&#xFF0C;WORKDIR &#x5219;&#x662F;&#x6574;&#x4F53;&#x6539;&#x53D8;&#x76EE;&#x5F55;</li>
-</ol>
-<h4 id="&#x5BB9;&#x5668;&#x5185;&#x5B89;&#x88C5;telnet&#x7B49;">&#x5BB9;&#x5668;&#x5185;&#x5B89;&#x88C5;telnet&#x7B49;</h4>
-<p>apk add busybox-extras</p>
-<pre><code>echo &apos;deb http://mirrors.aliyun.com/debian/ buster main non-free contrib&apos; &gt; /etc/apt/sources.list \
-&amp;&amp; echo &apos;deb http://mirrors.aliyun.com/debian-security buster/updates main&apos; &gt;&gt; /etc/apt/sources.list \
-&amp;&amp; echo &apos;deb http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib&apos; &gt;&gt; /etc/apt/sources.list \
-&amp;&amp; echo &apos;deb http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib&apos; &gt;&gt; /etc/apt/sources.list \
+<p>docker network create -d bridge my_bridge
+docker network connect my_bridge container-db
+docker network connect my_bridge container-nginx</p>
+<pre><code>
+#### Dockerfile&#x547D;&#x4EE4;
+1. ENTRYPOINT &#x548C; CMD
+1. COPY &#x548C; ADD
+1. WORKDIR &#x548C; cd&#xFF1A;cd &#x53EA;&#x5BF9;&#x5F53;&#x524D;&#x884C;&#x547D;&#x4EE4;&#x6709;&#x6548;&#xFF0C;WORKDIR &#x5219;&#x662F;&#x6574;&#x4F53;&#x6539;&#x53D8;&#x76EE;&#x5F55;
+
+#### &#x5BB9;&#x5668;&#x5185;&#x5B89;&#x88C5;telnet&#x7B49;
+apk add busybox-extras
+</code></pre><p>echo &apos;deb <a href="http://mirrors.aliyun.com/debian/" target="_blank">http://mirrors.aliyun.com/debian/</a> buster main non-free contrib&apos; &gt; /etc/apt/sources.list \
+&amp;&amp; echo &apos;deb <a href="http://mirrors.aliyun.com/debian-security" target="_blank">http://mirrors.aliyun.com/debian-security</a> buster/updates main&apos; &gt;&gt; /etc/apt/sources.list \
+&amp;&amp; echo &apos;deb <a href="http://mirrors.aliyun.com/debian/" target="_blank">http://mirrors.aliyun.com/debian/</a> buster-updates main non-free contrib&apos; &gt;&gt; /etc/apt/sources.list \
+&amp;&amp; echo &apos;deb <a href="http://mirrors.aliyun.com/debian/" target="_blank">http://mirrors.aliyun.com/debian/</a> buster-backports main non-free contrib&apos; &gt;&gt; /etc/apt/sources.list \
 &amp;&amp; apt-get update \
 &amp;&amp; apt-get install telnet
-</code></pre>
+```</p>
+
                                 
                                 </section>
                             
@@ -266,7 +281,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.docker相关","level":"1.4","depth":1,"previous":{"title":"1.《Kubernetes in Action》","level":"1.3","depth":1,"path":"docs/2.md","ref":"docs/2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/3.md","mtime":"2020-08-20T11:00:40.517Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-20T11:01:06.679Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.docker相关","level":"1.4","depth":1,"previous":{"title":"1.《Kubernetes in Action》","level":"1.3","depth":1,"path":"docs/2.md","ref":"docs/2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/3.md","mtime":"2020-08-20T11:39:05.097Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-20T11:39:30.214Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

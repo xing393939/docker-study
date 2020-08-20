@@ -1,8 +1,12 @@
 FROM php:5.6-fpm-alpine
 COPY src/ /code/
+RUN chown -R www-data:www-data /code
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
 && apk update
+
+# timezone
+RUN printf '[PHP]\ndate.timezone = "Asia/Shanghai"\n' > /usr/local/etc/php/conf.d/timezone.ini
 
 # OPcache defaults
 RUN docker-php-ext-configure opcache --enable-opcache && docker-php-ext-install opcache

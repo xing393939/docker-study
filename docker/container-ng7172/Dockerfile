@@ -5,7 +5,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 && apk update
 
 # telnet
-apk add busybox-extras
+RUN apk add busybox-extras
 
 EXPOSE 71
 EXPOSE 72

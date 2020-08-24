@@ -5,6 +5,9 @@ RUN chown -R www-data:www-data /code
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
 && apk update
 
+# telnet
+apk add busybox-extras
+
 # timezone
 RUN printf '[PHP]\ndate.timezone = "Asia/Shanghai"\n' > /usr/local/etc/php/conf.d/timezone.ini
 

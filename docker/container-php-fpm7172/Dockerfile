@@ -9,7 +9,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 RUN printf '[PHP]\ndate.timezone = "Asia/Shanghai"\n' > /usr/local/etc/php/conf.d/timezone.ini
 
 # redis不是php-src里的，因此不能使用docker-php-ext-install
-RUN pecl install -o -f redis-5.0.0 && docker-php-ext-enable redis
+RUN apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS \
+    && pecl install -o -f redis-5.0.0 && docker-php-ext-enable redis
 
 # gd
 RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \

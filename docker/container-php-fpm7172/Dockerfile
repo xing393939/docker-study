@@ -1,8 +1,6 @@
 FROM php:7.3-fpm-alpine3.12
-RUN cp /mnt/f/APICloud/apiserverWorkSpace .
-RUN cp /mnt/f/APICloud/apiserverWorkSpace .
-RUN ls -l
-COPY . /code/
+COPY apiserverWorkSpace /code/
+COPY dbserverWorkSpace /code/
 RUN chown -R www-data:www-data /code
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \

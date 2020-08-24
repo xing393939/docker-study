@@ -1,6 +1,5 @@
 FROM php:7.3-fpm-alpine3.12
-COPY apiserverWorkSpace /code/
-COPY dbserverWorkSpace /code/
+WORKDIR /code
 RUN chown -R www-data:www-data /code
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \

@@ -1,5 +1,6 @@
-FROM php:5.6-fpm-alpine
-COPY src/ /code/
+FROM php:7.3-fpm-alpine3.12
+COPY /mnt/f/APICloud/apiserverWorkSpace /code/
+COPY /mnt/f/APICloud/dbserverWorkSpace /code/
 RUN chown -R www-data:www-data /code
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
@@ -9,10 +10,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 RUN printf '[PHP]\ndate.timezone = "Asia/Shanghai"\n' > /usr/local/etc/php/conf.d/timezone.ini
 
 # redis不是php-src里的，因此不能使用docker-php-ext-install
-# https://www.itranslater.com/qa/details/2583237874283971584
-RUN apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS \
-    && pecl install -o -f redis-3.1.2  \
-    && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
+RUN pecl install -o -f redis-5.0.0 && docker-php-ext-enable redis
 
 # gd
 RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
@@ -23,6 +21,11 @@ docker-php-ext-configure gd \
 --with-jpeg-dir=/usr/include/ && \
 NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
 docker-php-ext-install -j${NPROC} gd
+
+# mcrypt
+RUN apk add --no-cache libmcrypt-dev \
+&& pecl install mcrypt-1.0.2 \
+&& docker-php-ext-enable mcrypt
 
 # OPcache defaults
 RUN docker-php-ext-configure opcache --enable-opcache && docker-php-ext-install opcache

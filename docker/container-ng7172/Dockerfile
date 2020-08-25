@@ -9,5 +9,5 @@ RUN apk add busybox-extras
 
 EXPOSE 71
 EXPOSE 72
-EXPOSE 61
-EXPOSE 62
+EXPOSE 81
+EXPOSE 82

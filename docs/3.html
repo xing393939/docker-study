@@ -243,12 +243,25 @@
 <li>docker update --restart=always container-php-fpm9272</li>
 <li>docker update --restart=always container-ng9272</li>
 </ol>
+<h4 id="docker-&#x8DE8;&#x4E3B;&#x673A;&#x7F51;&#x7EDC;&#xFF1A;overlay-&#x7B80;&#x4ECB;">docker &#x8DE8;&#x4E3B;&#x673A;&#x7F51;&#x7EDC;&#xFF1A;overlay &#x7B80;&#x4ECB;</h4>
+<ol>
+<li><a href="https://ying-zhang.github.io/cloud/2016/vm-net-2/" target="_blank">&#x518D;&#x8BF4;docker&#x53CA;&#x4E91;&#x4E2D;&#x7684;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;</a>&#xFF0C;&#x4ECB;&#x7ECD;&#x4E86;overlay&#x7684;&#x5386;&#x53F2;</li>
+<li><a href="https://blog.51cto.com/ganbing/2087598" target="_blank">&#x201C;&#x6DF1;&#x5165;&#x6D45;&#x51FA;&#x201D;&#x6765;&#x89E3;&#x8BFB;Docker&#x7F51;&#x7EDC;&#x6838;&#x5FC3;&#x539F;&#x7406;</a>&#xFF0C;&#x8BB2;&#x4E86;&#x6C99;&#x76D2;&#x3001;&#x7AEF;&#x70B9;&#x3001;overlay&#x9A71;&#x52A8;</li>
+<li><a href="https://cizixs.com/2016/06/13/docker-overlay-network/" target="_blank">docker &#x8DE8;&#x4E3B;&#x673A;&#x7F51;&#x7EDC;&#xFF1A;overlay &#x7B80;&#x4ECB;</a>&#xFF0C;overlay&#x9700;&#x8981;swarm master&#x8282;&#x70B9;&#xFF0C;&#x8FD0;&#x884C;swarm manager&#x670D;&#x52A1;</li>
+</ol>
+<h4 id="docker-network&#x7684;ipvlan&#x6A21;&#x5F0F;&#x3001;macvlan&#x6A21;&#x5F0F;">docker network&#x7684;ipvlan&#x6A21;&#x5F0F;&#x3001;macvlan&#x6A21;&#x5F0F;</h4>
+<ol>
+<li><a href="https://www.cnblogs.com/menkeyi/p/11374023.html" target="_blank">Macvlan &#x548C; IPvlan</a>&#xFF0C;ipvlan l2&#x548C;macvlan&#x7C7B;&#x4F3C;&#xFF0C;ipvlan l3&#x6709;&#x70B9;&#x50CF;&#x8DEF;&#x7531;&#x5668;</li>
+<li><a href="https://xiazemin.github.io/MyBlog/docker/2019/07/11/ipvlan.html" target="_blank">Macvlan&#x4E0E;ipvlan</a>&#xFF0C;&#x4ECB;&#x7ECD;&#x4E86;&#x4E00;&#x4E9B;&#x5927;&#x5382;&#x7684;&#x7F51;&#x7EDC;&#x65B9;&#x6848;</li>
+</ol>
 <h4 id="docker&#x5BB9;&#x5668;&#x8BBF;&#x95EE;&#x5BBF;&#x4E3B;&#x673A;&#x670D;&#x52A1;&#xFF08;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x5BB9;&#x5668;&#xFF09;">docker&#x5BB9;&#x5668;&#x8BBF;&#x95EE;&#x5BBF;&#x4E3B;&#x673A;&#x670D;&#x52A1;&#xFF08;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x5BB9;&#x5668;&#xFF09;</h4>
 <ol>
 <li><a href="https://blog.csdn.net/qq_38403662/article/details/102555888" target="_blank">docker&#x5BB9;&#x5668;&#x8BBF;&#x95EE;&#x5BBF;&#x4E3B;&#x673A;&#x670D;&#x52A1;</a></li>
 <li><a href="https://www.cnblogs.com/zouzou-busy/p/12148825.html" target="_blank">Docker&#x5BB9;&#x5668;&#x95F4;&#x5229;&#x7528;bridge&#x7F51;&#x6865;&#x5B9E;&#x73B0;&#x53CC;&#x5411;&#x901A;&#x4FE1;</a></li>
+<li><a href="https://lgzblog.com/2020/04/23/docker%E5%9B%9B%E5%A4%A7%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/" target="_blank">docker&#x56DB;&#x5927;&#x7F51;&#x7EDC;&#x6A21;&#x5F0F;</a></li>
+<li>&#x5199;host&#xFF0C;Dockerfile &#x6DFB;&#x52A0;&#xFF1A;ip -4 route list match 0/0 | awk &apos;{print $3 &quot;host.docker.internal&quot;}&apos; &gt;&gt; /etc/hosts</li>
 <li>host&#x6A21;&#x5F0F;&#xFF0C;--network host&#xFF0C;&#x4F7F;&#x7528;&#x4E3B;&#x673A;&#x7F51;&#x7EDC;&#x4F5C;&#x4E3A;&#x5BB9;&#x5668;&#x7F51;&#x7EDC;</li>
-<li>Dockerfile &#x6DFB;&#x52A0;&#xFF1A;ip -4 route list match 0/0 | awk &apos;{print $3 &quot;host.docker.internal&quot;}&apos; &gt;&gt; /etc/hosts</li>
+<li>container&#x6A21;&#x5F0F;&#xFF0C;&#x548C;&#x4E00;&#x4E2A;&#x6307;&#x5B9A;&#x7684;&#x5BB9;&#x5668;&#x5171;&#x4EAB;IP&#x3001;&#x7AEF;&#x53E3;&#x8303;&#x56F4;&#xFF0C;&#x5F53;&#x7136;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x3001;&#x8FDB;&#x7A0B;&#x5217;&#x8868;&#x7B49;&#x8FD8;&#x662F;&#x9694;&#x79BB;&#x7684;</li>
 <li>bridge&#x6A21;&#x5F0F;&#xFF0C;&#x5728;&#x540C;&#x4E00;&#x7F51;&#x6865;&#x7684;&#x5BB9;&#x5668;&#x5904;&#x4E8E;&#x540C;&#x4E00;&#x4E2A;network&#xFF1A;</li>
 </ol>
 <pre><code>docker network ls
@@ -340,7 +353,7 @@ docker network connect my_bridge container-nginx
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.docker相关","level":"1.4","depth":1,"next":{"title":"1.gitlab-ci配置","level":"1.5","depth":1,"path":"docs/4.md","ref":"docs/4.md","articles":[]},"previous":{"title":"1.《Kubernetes in Action》","level":"1.3","depth":1,"path":"docs/2.md","ref":"docs/2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/3.md","mtime":"2020-09-07T00:59:27.349Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-07T00:59:56.981Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.docker相关","level":"1.4","depth":1,"next":{"title":"1.gitlab-ci配置","level":"1.5","depth":1,"path":"docs/4.md","ref":"docs/4.md","articles":[]},"previous":{"title":"1.《Kubernetes in Action》","level":"1.3","depth":1,"path":"docs/2.md","ref":"docs/2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/3.md","mtime":"2020-09-08T10:03:39.875Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-08T10:04:08.781Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

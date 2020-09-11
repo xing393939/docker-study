@@ -1,0 +1,351 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>1.docker和kubernetes的网络 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="4.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">目录</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="1.html">
+            
+                <a href="1.html">
+            
+                    
+                    1.k3s 入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="2.html">
+            
+                <a href="2.html">
+            
+                    
+                    1.《Kubernetes in Action》
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="3.html">
+            
+                <a href="3.html">
+            
+                    
+                    1.docker相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="4.html">
+            
+                <a href="4.html">
+            
+                    
+                    1.gitlab-ci配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6" data-path="5.html">
+            
+                <a href="5.html">
+            
+                    
+                    1.docker和kubernetes的网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >1.docker和kubernetes的网络</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="docker&#x548C;kubernetes&#x7684;&#x7F51;&#x7EDC;">docker&#x548C;kubernetes&#x7684;&#x7F51;&#x7EDC;</h3>
+<h4 id="&#x53C2;&#x8003;&#x8D44;&#x6599;">&#x53C2;&#x8003;&#x8D44;&#x6599;</h4>
+<ol>
+<li><a href="https://www.jianshu.com/p/001f72d0eaa8" target="_blank">Kubernetes&#x7F51;&#x7EDC;&#x5B9E;&#x73B0;</a></li>
+<li><a href="https://www.jianshu.com/p/22a7032bb7bd" target="_blank">Docker&#x56DB;&#x79CD;&#x7F51;&#x7EDC;&#x6A21;&#x5F0F;</a></li>
+<li><a href="https://www.jianshu.com/p/f86d4b88777d" target="_blank">Linux&#x865A;&#x62DF;&#x7F51;&#x7EDC;&#x6280;&#x672F;</a></li>
+</ol>
+<h4 id="kubernetes&#x7684;&#x7F51;&#x7EDC;">kubernetes&#x7684;&#x7F51;&#x7EDC;</h4>
+<ol>
+<li>Pod&#x5185;&#x5BB9;&#x5668;&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x4FE1;&#xFF1A;Pod&#x5185;&#x5171;&#x4EAB;&#x4E00;&#x4E2A;&#x7F51;&#x7EDC;&#x5806;&#x6808;&#xFF0C;ip&#x5730;&#x5740;&#x3001;&#x7F51;&#x7EDC;&#x8BBE;&#x5907;&#x90FD;&#x662F;&#x5171;&#x4EAB;&#x7684;</li>
+<li>&#x540C;&#x4E00;&#x4E2A;Node&#x5185;&#x7684;Pod&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x4FE1;&#xFF1A;&#x901A;&#x8FC7;docker&#x7F51;&#x6865;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x5728;&#x4E00;&#x4E2A;&#x5C40;&#x57DF;&#x7F51;</li>
+<li>&#x4E0D;&#x540C;Node&#x4E0A;&#x7684;Pod&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x4FE1;&#xFF1A;&#x9700;&#x8981;&#x501F;&#x52A9;&#x5BB9;&#x5668;&#x7F51;&#x7EDC;&#x63A5;&#x53E3;&#xFF08;CNI&#xFF09;&#xFF0C;&#x6BD4;&#x5982;calico&#x3001;Flannel<ol>
+<li>&#x6BCF;&#x4E2A;&#x4E3B;&#x673A;&#x4E0A;&#x5B89;&#x88C5;&#x5E76;&#x8FD0;&#x884C;etcd&#x548C;flannel</li>
+<li>&#x5728;etcd&#x4E2D;&#x89C4;&#x5212;&#x914D;&#x7F6E;&#x6240;&#x6709;&#x4E3B;&#x673A;&#x7684;docker&#x7F51;&#x6865;&#x5B50;&#x7F51;&#x8303;&#x56F4;</li>
+<li>&#x6BCF;&#x4E2A;&#x4E3B;&#x673A;&#x4E0A;&#x7684;flanneld&#x6839;&#x636E;etcd&#x4E2D;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x4E3A;docker&#x7F51;&#x6865;&#x5206;&#x914D;&#x5B50;&#x7F51;</li>
+<li>Pod&#x4E4B;&#x95F4;&#x901A;&#x8BAF;&#x65F6;&#xFF0C;&#x67E5;&#x627E;etcd&#x6570;&#x636E;&#x5E93;&#x627E;&#x5230;&#x76EE;&#x6807;&#x5BB9;&#x5668;&#x7684;&#x5B50;&#x7F51;&#x6240;&#x5BF9;&#x5E94;&#x7684;outip&#xFF08;&#x76EE;&#x7684;&#x5BBF;&#x4E3B;&#x673A;&#x7684;IP&#xFF09;&#x3002;&#x5C06;&#x539F;&#x59CB;&#x6570;&#x636E;&#x5305;&#x5C01;&#x88C5;&#x5728;VXLAN&#x6216;UDP&#x6570;&#x636E;&#x5305;&#x4E2D;&#xFF0C;IP&#x5C42;&#x4EE5;outip&#x4E3A;&#x76EE;&#x6807;IP&#x8FDB;&#x884C;&#x5C01;&#x88C5;&#xFF0C;&#x7531;&#x4E8E;&#x76EE;&#x7684;IP&#x662F;&#x5BBF;&#x4E3B;&#x673A;IP&#xFF0C;&#x56E0;&#x6B64;&#x8DEF;&#x7531;&#x662F;&#x53EF;&#x8FBE;&#x7684;</li>
+</ol>
+</li>
+</ol>
+<h4 id="docker&#x56DB;&#x79CD;&#x7F51;&#x7EDC;&#x6A21;&#x5F0F;">Docker&#x56DB;&#x79CD;&#x7F51;&#x7EDC;&#x6A21;&#x5F0F;</h4>
+<ol>
+<li>host&#x6A21;&#x5F0F;&#xFF1A;&#x548C;&#x5BBF;&#x4E3B;&#x673A;&#x5171;&#x7528;&#x4E00;&#x4E2A;Network Namespace&#xFF0C;&#x7F51;&#x7EDC;&#x6027;&#x80FD;&#x6BD4;&#x8F83;&#x597D;&#x4F46;&#x662F;&#x6CA1;&#x6709;&#x9694;&#x79BB;&#x6027;</li>
+<li>container&#x6A21;&#x5F0F;&#xFF1A;&#x6307;&#x5B9A;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x7684;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#x5171;&#x4EAB;&#x4E00;&#x4E2A; Network Namespace&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x548C;&#x5BBF;&#x4E3B;&#x673A;&#x5171;&#x4EAB;</li>
+<li>none&#x6A21;&#x5F0F;&#xFF1A;&#x6CA1;&#x6709;&#x7F51;&#x5361;&#x3001;IP&#x3001;&#x8DEF;&#x7531;&#x7B49;&#x4FE1;&#x606F;&#xFF0C;&#x9700;&#x8981;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x4E3A;&#x5B83;&#x6DFB;&#x52A0;&#x7F51;&#x5361;&#x3001;&#x914D;&#x7F6E;IP&#x7B49;&#x3002;&#x9694;&#x79BB;&#x6027;&#x597D;&#x3002;</li>
+<li>bridge&#x6A21;&#x5F0F;&#xFF1A;&#x901A;&#x8FC7;&#x865A;&#x62DF;&#x7F51;&#x6865;&#x901A;&#x8BAF;&#xFF0C;&#x865A;&#x62DF;&#x7F51;&#x6865;&#x7684;&#x5DE5;&#x4F5C;&#x65B9;&#x5F0F;&#x548C;&#x7269;&#x7406;&#x4EA4;&#x6362;&#x673A;&#x7C7B;&#x4F3C;&#x3002;&#x5BB9;&#x5668;&#x901A;&#x8FC7;&#x4EA4;&#x6362;&#x673A;&#x8FDE;&#x5728;&#x4E86;&#x4E00;&#x4E2A;&#x4E8C;&#x5C42;&#x7F51;&#x7EDC;&#x4E2D;&#x3002;</li>
+</ol>
+<h4 id="linux&#x865A;&#x62DF;&#x7F51;&#x7EDC;&#x6280;&#x672F;">Linux&#x865A;&#x62DF;&#x7F51;&#x7EDC;&#x6280;&#x672F;</h4>
+<ol>
+<li><a href="https://tonybai.com/2017/01/11/understanding-linux-network-namespace-for-docker-network/" target="_blank">&#x7406;&#x89E3;Docker&#x5BB9;&#x5668;&#x7F51;&#x7EDC;&#x4E4B;Linux Network Namespace</a></li>
+<li>Network Namespace&#xFF1A;&#x6709;&#x72EC;&#x81EA;&#x7F51;&#x7EDC;&#x6808;&#x4FE1;&#x606F;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;ns&#x9ED8;&#x8BA4;&#x6709;&#x4E00;&#x4E2A;lo&#x56DE;&#x73AF;&#x7F51;&#x5361;&#x3002;&#x53EF;&#x4E3A;&#x5176;&#x521B;&#x5EFA;</li>
+<li>&#x53EF;&#x8F6C;&#x79FB;&#x8BBE;&#x5907;&#xFF1A;veth</li>
+<li>&#x4E0D;&#x53EF;&#x8F6C;&#x79FB;&#x8BBE;&#x5907;&#xFF1A;lo&#x3001;vxlan&#x3001;ppp&#x3001;bridge</li>
+<li>veth pair&#xFF1A;&#x521B;&#x5EFA;&#x540E;&#x6709;&#x4E24;&#x4E2A;&#x865A;&#x62DF;&#x7F51;&#x5361;&#x8BBE;&#x5907;veth0&#x548C;veth1&#xFF0C;&#x53EF;&#x4EE5;&#x628A;veth&#x9644;&#x52A0;&#x5230;ns&#x4E0A;</li>
+<li>veth pair&#xFF1A;&#x5168;&#x79F0;&#x662F; Virtual Ethernet Pair&#xFF0C;&#x5B83;&#x53EA;&#x80FD;&#x5B9E;&#x73B0;2&#x4E2A;ns&#x4E4B;&#x95F4;&#x7684;&#x7F51;&#x7EDC;&#x4EA4;&#x4E92;</li>
+<li>&#x7F51;&#x6865;&#xFF1A;&#x7F51;&#x6865;&#x5C31;&#x662F;&#x628A;&#x4E00;&#x53F0;&#x673A;&#x5668;&#x4E0A;&#x7684;&#x82E5;&#x5E72;&#x4E2A;ns&#x201C;&#x8FDE;&#x63A5;&#x201D;&#x8D77;&#x6765;&#x3002;&#x8FC7;&#x7A0B;&#x5982;&#x4E0B;&#xFF1A;<ol>
+<li>&#x7F51;&#x6865;&#x8BBE;&#x5907; br0 &#x7ED1;&#x5B9A;&#x4E86; eth0 &#x548C; eth1</li>
+<li>&#x7F51;&#x7EDC;&#x534F;&#x8BAE;&#x6808;&#x7684;&#x4E0A;&#x5C42;&#x6765;&#x8BF4;&#xFF0C;&#x53EA;&#x770B;&#x5F97;&#x5230; br0&#xFF0C;&#x4E0A;&#x5C42;&#x534F;&#x8BAE;&#x6808;&#x9700;&#x8981;&#x53D1;&#x9001;&#x7684;&#x62A5;&#x6587;&#x88AB;&#x9001;&#x5230; br0&#xFF0C;&#x7F51;&#x6865;&#x8BBE;&#x5907;&#x7684;&#x5904;&#x7406;&#x4EE3;&#x7801;&#x5224;&#x65AD;&#x62A5;&#x6587;&#x8BE5;&#x88AB;&#x8F6C;&#x53D1;&#x5230; eth0 &#x8FD8;&#x662F; eth1&#xFF0C;&#x6216;&#x8005;&#x4E24;&#x8005;&#x7686;&#x8F6C;&#x53D1;</li>
+<li>eth0 &#x6216; eth1 &#x53D1;&#x9001;&#x62A5;&#x6587;&#x7ED9; br0&#xFF0C;br0 &#x5224;&#x65AD;&#x62A5;&#x6587;&#x5E94;&#x8BE5;&#x88AB;&#x8F6C;&#x53D1;&#x3001;&#x4E22;&#x5F03;&#x8FD8;&#x662F;&#x63D0;&#x4EA4;&#x5230;&#x534F;&#x8BAE;&#x6808;&#x4E0A;&#x5C42;&#x3002;</li>
+<li>&#x6709;&#x65F6;eth0&#x3001;eth1 &#x4E5F;&#x53EF;&#x80FD;&#x4F1A;&#x4F5C;&#x4E3A;&#x62A5;&#x6587;&#x7684;&#x6E90;&#x5730;&#x5740;&#x6216;&#x76EE;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x76F4;&#x63A5;&#x53C2;&#x4E0E;&#x62A5;&#x6587;&#x7684;&#x53D1;&#x9001;&#x4E0E;&#x63A5;&#x6536;&#xFF0C;&#x4ECE;&#x800C;&#x7ED5;&#x8FC7;&#x7F51;&#x6865;</li>
+</ol>
+</li>
+<li>iptables/netfilter&#xFF0C;iptables&#x5176;&#x5B9E;&#x662F;&#x4E00;&#x4E2A;&#x547D;&#x4EE4;&#x884C;&#x5DE5;&#x5177;&#xFF0C;&#x4F4D;&#x4E8E;&#x7528;&#x6237;&#x7A7A;&#x95F4;&#xFF0C;&#x5B83;&#x628A;&#x89C4;&#x5219;&#x8BBE;&#x7F6E;&#x5230;netfilter&#xFF08;&#x771F;&#x6B63;&#x7684;&#x9632;&#x706B;&#x5899;&#xFF09;</li>
+<li>iptables/netfilter&#xFF08;&#x4EE5;&#x4E0B;&#x7B80;&#x79F0;iptables&#xFF09;&#x53EF;&#x4EE5;&#x5B8C;&#x6210;&#x5C01;&#x5305;&#x8FC7;&#x6EE4;&#x3001;&#x5C01;&#x5305;&#x91CD;&#x5B9A;&#x5411;&#x548C;&#x7F51;&#x7EDC;&#x5730;&#x5740;&#x8F6C;&#x6362;&#xFF08;NAT&#xFF09;&#x7B49;&#x529F;&#x80FD;&#x3002;</li>
+<li>iptables&#x6D88;&#x606F;&#x5904;&#x7406;&#x94FE;&#xFF1A;<ol>
+<li>INPUT&#xFF1A;&#x8FDB;&#x6765;&#x7684;&#x6570;&#x636E;&#x5305;&#x65F6;</li>
+<li>OUTPUT&#xFF1A;&#x5916;&#x51FA;&#x7684;&#x6570;&#x636E;&#x5305;&#x65F6;</li>
+<li>FORWARD&#xFF1A;&#x8F6C;&#x53D1;&#x6570;&#x636E;&#x5305;&#x65F6;</li>
+<li>PREROUTING&#xFF1A;&#x5BF9;&#x6570;&#x636E;&#x5305;&#x4F5C;&#x8DEF;&#x7531;&#x9009;&#x62E9;&#x524D;&#x5E94;&#x7528;&#xFF08;&#x6240;&#x6709;&#x7684;&#x6570;&#x636E;&#x5305;&#x8FDB;&#x6765;&#x7684;&#x65F6;&#x4FAF;&#x90FD;&#x5148;&#x7531;&#x8FD9;&#x4E2A;&#x94FE;&#x5904;&#x7406;&#xFF09;</li>
+<li>POSTROUTING&#xFF1A;&#x5BF9;&#x6570;&#x636E;&#x5305;&#x4F5C;&#x8DEF;&#x7531;&#x9009;&#x62E9;&#x540E;&#x5E94;&#x7528;&#xFF08;&#x6240;&#x6709;&#x7684;&#x6570;&#x636E;&#x5305;&#x51FA;&#x6765;&#x7684;&#x65F6;&#x4FAF;&#x90FD;&#x5148;&#x7531;&#x8FD9;&#x4E2A;&#x94FE;&#x5904;&#x7406;&#xFF09;</li>
+</ol>
+</li>
+<li>iptables&#x89C4;&#x5219;&#x8868;<ol>
+<li>Filter&#xFF1A;&#x54EA;&#x4E9B;&#x6570;&#x636E;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#xFF0C;&#x54EA;&#x4E9B;&#x6570;&#x636E;&#x4E0D;&#x80FD;&#x901A;&#x8FC7;</li>
+<li>NAT&#xFF1A;&#x63A7;&#x5236;&#x8981;&#x4E0D;&#x8981;&#x8FDB;&#x884C;&#x5730;&#x5740;&#x8F6C;&#x6362;&#xFF0C;&#x4EE5;&#x53CA;&#x600E;&#x6837;&#x4FEE;&#x6539;&#x6E90;&#x5730;&#x5740;&#x6216;&#x76EE;&#x7684;&#x5730;&#x5740;</li>
+<li>Mangle&#xFF1A;&#x4E3B;&#x8981;&#x7528;&#x6765;&#x4FEE;&#x6539;IP&#x6570;&#x636E;&#x5305;&#x5934;&#xFF0C;&#x6BD4;&#x5982;&#x4FEE;&#x6539;TTL&#x503C;&#x3001;&#x6DFB;&#x52A0;&#x6807;&#x8BB0;&#x4EE5;&#x4FBF;&#x4E8E;&#x540E;&#x7EED;&#x6A21;&#x5757;&#x5BF9;&#x6570;&#x636E;&#x5305;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF08;&#x5F80;&#x5185;&#x6838;skb&#x7ED3;&#x6784;&#x4E2D;&#x6DFB;&#x52A0;&#x6807;&#x8BB0;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5F80;&#x771F;&#x6B63;&#x7684;IP&#x6570;&#x636E;&#x5305;&#x4E0A;&#x52A0;&#x4E1C;&#x897F;&#xFF09;</li>
+<li>Raw&#xFF1A;raw&#x8868;&#x91CC;&#x7684;rule&#x7684;&#x529F;&#x80FD;&#x662F;&#x7ED9;&#x6570;&#x636E;&#x5305;&#x6253;&#x6807;&#x8BB0;&#xFF0C;&#x4ECE;&#x800C;&#x63A7;&#x5236;&#x54EA;&#x4E9B;&#x6570;&#x636E;&#x5305;&#x4E0D;&#x505A;&#x94FE;&#x63A5;&#x8DDF;&#x8E2A;&#x5904;&#x7406;&#xFF0C;&#x4ECE;&#x800C;&#x63D0;&#x9AD8;&#x6027;&#x80FD;</li>
+</ol>
+</li>
+<li>iptables&#x6D88;&#x606F;&#x5904;&#x7406;&#x94FE;&#x548C;&#x89C4;&#x5219;&#x8868;&#x7684;&#x5173;&#x7CFB;&#x5982;&#x4E0B;&#x56FE;&#xFF1A;
+<img src="../images/linux-iptables-route.png" alt="&#x56FE;1"></li>
+</ol>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="4.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 1.gitlab-ci配置">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"1.docker和kubernetes的网络","level":"1.6","depth":1,"previous":{"title":"1.gitlab-ci配置","level":"1.5","depth":1,"path":"docs/4.md","ref":"docs/4.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/5.md","mtime":"2020-09-11T11:03:18.695Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-11T11:03:45.431Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

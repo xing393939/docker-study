@@ -285,7 +285,7 @@
 </li>
 <li>headless &#x670D;&#x52A1;&#xFF1A;kind&#x8FD8;&#x662F;service&#xFF0C;&#x4F46;&#x662F;clusterIP&#x662F;None&#x3002;nslookup&#x5B83;&#x7684;dns&#xFF0C;&#x8FD4;&#x56DE;&#x6BCF;&#x4E2A;pod&#x7684;ip</li>
 </ul>
-<h3 id="&#x5171;&#x4EAB;&#x5377;">&#x5171;&#x4EAB;&#x5377;</h3>
+<h4 id="&#x5171;&#x4EAB;&#x5377;">&#x5171;&#x4EAB;&#x5377;</h4>
 <ul>
 <li>emptyDir&#xFF1A;&#x4E34;&#x65F6;&#x5171;&#x4EAB;&#x5377;&#xFF0C;&#x5220;&#x9664;pod&#xFF0C;&#x5377;&#x5C31;&#x6CA1;&#x4E86;&#xFF0C;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x5B58;&#x50A8;&#x4ECB;&#x8D28;&#x662F;&#x5185;&#x5B58;</li>
 <li>hostPath&#xFF1A;&#x5B58;&#x50A8;&#x4ECB;&#x8D28;&#x662F;&#x8282;&#x70B9;&#x7684;&#x76EE;&#x5F55;</li>
@@ -300,6 +300,12 @@
 </ol>
 </li>
 </ul>
+<h4 id="configmap&#x548C;secret">configMap&#x548C;secret</h4>
+<ol>
+<li>secret&#x547D;&#x4EE4;&#xFF1A;kubectl create secret [command] $secretName [options]&#xFF0C;&#x5176;&#x4E2D;command&#x6709;&#x4E09;&#x79CD;&#xFF1A;docker-registry&#x3001;tls&#x3001;generic</li>
+<li>secret&#x521B;&#x5EFA;&#xFF1A;kubectl create secret docker-registry my-secret --docker-server=xxx --docker-username=xxx --docker-password=xxx --docker-email=xxx</li>
+<li>secret&#x67E5;&#x770B;&#xFF1A;kubectl get secret</li>
+</ol>
 <h4 id="&#x7AE0;&#x8282;8&#xFF0C;&#x5BB9;&#x5668;&#x5185;&#x5982;&#x4F55;&#x8BBF;&#x95EE;&#x8D44;&#x6E90;&#x7684;&#x5143;&#x6570;&#x636E;">&#x7AE0;&#x8282;8&#xFF0C;&#x5BB9;&#x5668;&#x5185;&#x5982;&#x4F55;&#x8BBF;&#x95EE;&#x8D44;&#x6E90;&#x7684;&#x5143;&#x6570;&#x636E;</h4>
 <ol>
 <li>&#x53EF;&#x7528;&#x7684;&#x5143;&#x6570;&#x636E;<ol>
@@ -390,7 +396,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.《Kubernetes in Action》","level":"1.3","depth":1,"next":{"title":"1.docker相关","level":"1.4","depth":1,"path":"docs/3.md","ref":"docs/3.md","articles":[]},"previous":{"title":"1.k3s 入门","level":"1.2","depth":1,"path":"docs/1.md","ref":"docs/1.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/2.md","mtime":"2020-09-13T10:15:00.413Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-13T10:15:29.850Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.《Kubernetes in Action》","level":"1.3","depth":1,"next":{"title":"1.docker相关","level":"1.4","depth":1,"path":"docs/3.md","ref":"docs/3.md","articles":[]},"previous":{"title":"1.k3s 入门","level":"1.2","depth":1,"path":"docs/1.md","ref":"docs/1.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/2.md","mtime":"2020-09-14T01:12:11.949Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-14T01:12:44.775Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

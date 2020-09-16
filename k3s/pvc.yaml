@@ -1,0 +1,26 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pv01
+  labels:
+    type: amazonEBS
+spec:
+  capacity:
+    storage: 1Gi
+accessModes:
+  - ReadWriteOnce
+awsElasticBlockStore:
+  volumeID: vol-0c04e0f489d925f64
+  fsType: ext4
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc01
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

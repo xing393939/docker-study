@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-app
+spec:
+  selector:
+    matchLabels:
+      app: express-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: express-app
+    spec:
+      containers:
+      - name: express-app
+        image: registry.cn-qingdao.aliyuncs.com/qinhan/simida:nginx-test
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+        - name: my-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-nginx
+  labels:
+    app: genkey
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: express-app
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-nginx
+spec:
+  rules:
+  - host: tool.ivu1314.com 
+    http:
+      paths:
+      - backend:
+          serviceName: service-nginx
+          servicePort: http

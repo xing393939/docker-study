@@ -12,11 +12,18 @@ spec:
       labels:
         app: express-app
     spec:
+      volumes:
+      - name: volume01
+        persistentVolumeClaim:
+          claimName: pvc01
       containers:
       - name: express-app
         image: registry.cn-qingdao.aliyuncs.com/qinhan/simida:nginx-test
         ports:
         - containerPort: 80
+        volumeMounts:
+        - name: volume01
+          mountPath: /volume01
       imagePullSecrets:
         - name: my-secret
 ---

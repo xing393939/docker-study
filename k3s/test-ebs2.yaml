@@ -1,4 +1,20 @@
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-manually-created-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: ebs.csi.aws.com
+    volumeHandle: vol-0cae13614236d2f8b
+    readOnly: false
+    fsType: ext4
+---
+apiVersion: v1
 kind: Pod
 metadata:
   name: test-ebs
@@ -11,6 +27,5 @@ spec:
       name: test-volume
   volumes:
   - name: test-volume
-    awsElasticBlockStore:
-      volumeID: vol-0cae13614236d2f8b
-      fsType: ext4
+    persistentVolumeClaim:
+      claimName: my-manually-created-pv

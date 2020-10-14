@@ -1,3 +1,18 @@
+kind: Deployment
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: traefik
+        ports:
+        - containerPort: 8080
+          name: dash
+          protocol: TCP
+---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -10,11 +25,8 @@ spec:
   - host: tool.ivu1314.com
     http:
       paths:
-      - path: /dashboard/
+      - path: /traefik/
         backend:
           serviceName: traefik
           servicePort: dash
-      - path: /nginx/
-        backend:
-          serviceName: my-nginx
-          servicePort: http
+

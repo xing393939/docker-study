@@ -45,6 +45,7 @@ spec:
   - host: tool.ivu1314.com 
     http:
       paths:
-      - backend:
+      - path: /nginx/
+        backend:
           serviceName: service-nginx
           servicePort: http

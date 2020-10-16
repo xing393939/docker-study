@@ -10,7 +10,11 @@ spec:
   - host: tool.ivu1314.com
     http:
       paths:
-      - backend:
+      - path: /dashboard/
+        backend:
           serviceName: traefik
           servicePort: dash
-
+      - path: /api/providers
+        backend:
+          serviceName: traefik
+          servicePort: dash

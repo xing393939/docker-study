@@ -1,4 +1,5 @@
 # test sql: insert test,host=127.0.0.1,monitor_name=test count=1
+# test cli: curl -X POST "http://host:8086/write?db=mydb&u=admin&p=cx123456" --data-binary "test,host=server01,region=us-west count=2"
 apiVersion: apps/v1
 kind: Deployment
 metadata:

@@ -16,6 +16,9 @@ spec:
       containers:
         - name: influxdb
           image: influxdb:1.8.3
+          ports:
+            - containerPort: 8086
+              protocol: TCP
 ---
 apiVersion: v1
 kind: Service

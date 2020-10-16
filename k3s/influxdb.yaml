@@ -1,3 +1,4 @@
+# test sql: insert test,host=127.0.0.1,monitor_name=test count=1
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,7 +24,7 @@ spec:
             - name: INFLUXDB_DB
               value: mydb
             - name: INFLUXDB_HTTP_AUTH_ENABLED
-              value: 1
+              value: 'true'
             - name: INFLUXDB_ADMIN_USER
               value: admin
             - name: INFLUXDB_ADMIN_PASSWORD

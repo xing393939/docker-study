@@ -19,6 +19,19 @@ spec:
           ports:
             - containerPort: 8086
               protocol: TCP
+          env:
+            - name: INFLUXDB_DB
+              value: mydb
+            - name: INFLUXDB_ADMIN_ENABLED
+              value: true
+            - name: INFLUXDB_ADMIN_USER
+              value: admin
+            - name: INFLUXDB_ADMIN_PASSWORD
+              value: cx123456
+            - name: INFLUXDB_USER
+              value: user
+            - name: INFLUXDB_USER_PASSWORD
+              value: userpass
 ---
 apiVersion: v1
 kind: Service

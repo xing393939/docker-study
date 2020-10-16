@@ -35,7 +35,22 @@ metadata:
     app: grafana
 spec:
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 3000
   selector:
     app: grafana
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-nginx
+spec:
+  rules:
+    - host: tool.ivu1314.com
+      http:
+        paths:
+          - path: /login
+            backend:
+              serviceName: monitoring-grafana
+              servicePort: http

@@ -46,7 +46,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ingress-nginx
+  name: ingress-influxdb
 spec:
   rules:
     - host: tool.ivu1314.com

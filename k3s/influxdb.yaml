@@ -53,12 +53,12 @@ spec:
       http:
         paths:
         - path: /write
-          pathType: Prefix
+          pathType: Exact
           backend:
             serviceName: monitoring-influxdb
             servicePort: 8086
         - path: /query
-          pathType: Prefix
+          pathType: Exact
           backend:
             serviceName: monitoring-influxdb
             servicePort: 8086

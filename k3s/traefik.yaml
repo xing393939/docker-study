@@ -15,6 +15,7 @@ spec:
           serviceName: traefik
           servicePort: dash
       - path: /api/providers
+        pathType: Prefix
         backend:
           serviceName: traefik
           servicePort: dash

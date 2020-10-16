@@ -42,3 +42,23 @@ spec:
       targetPort: 8086
   selector:
     app: influxdb
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-nginx
+spec:
+  rules:
+    - host: tool.ivu1314.com
+      http:
+        paths:
+        - path: /write
+          pathType: Prefix
+          backend:
+            serviceName: monitoring-influxdb
+            servicePort: 8086
+        - path: /query
+          pathType: Prefix
+          backend:
+            serviceName: monitoring-influxdb
+            servicePort: 8086

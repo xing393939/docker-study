@@ -50,7 +50,6 @@ spec:
     - host: tool.ivu1314.com
       http:
         paths:
-          - path: /login
-            backend:
+          - backend:
               serviceName: monitoring-grafana
               servicePort: http

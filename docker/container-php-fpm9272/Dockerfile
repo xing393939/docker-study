@@ -42,12 +42,11 @@ ENV PHP_OPCACHE_REVALIDATE_FREQUENCY="0"
 ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS="0"
 
 # PHP-FPM defaults
-ENV PHP_FPM_PM="dynamic"
-ENV PHP_FPM_MAX_CHILDREN="50"
-ENV PHP_FPM_START_SERVERS="20"
-ENV PHP_FPM_MIN_SPARE_SERVERS="10"
-ENV PHP_FPM_MAX_SPARE_SERVERS="20"
-ENV PHP_FPM_MAX_REQUESTS="1000"
+RUN tmp=/usr/local/etc/php-fpm.d/www.conf \
+&& sed -i 's/pm.max_children/pm.max_children=50 ;/' $tmp \
+&& sed -i 's/pm.start_servers/pm.start_servers=20 ;/' $tmp \
+&& sed -i 's/pm.max_spare_servers/pm.max_spare_servers=20 ;/' $tmp
+
 
 EXPOSE 9000
 

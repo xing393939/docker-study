@@ -35,11 +35,7 @@ RUN apk add --no-cache libmcrypt-dev \
 
 # OPcache defaults
 RUN docker-php-ext-configure opcache --enable-opcache && docker-php-ext-install opcache
-ENV PHP_OPCACHE_ENABLE="1"
-ENV PHP_OPCACHE_MEMORY_CONSUMPTION="128"
-ENV PHP_OPCACHE_MAX_ACCELERATED_FILES="10000"
-ENV PHP_OPCACHE_REVALIDATE_FREQUENCY="0"
-ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS="0"
+RUN printf 'opcache.validate_timestamps=0\n' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
 # PHP-FPM defaults
 RUN tmp=/usr/local/etc/php-fpm.d/www.conf \

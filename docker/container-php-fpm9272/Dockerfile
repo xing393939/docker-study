@@ -39,9 +39,9 @@ RUN printf 'opcache.validate_timestamps=0\n' >> /usr/local/etc/php/conf.d/docker
 
 # PHP-FPM defaults
 RUN tmp=/usr/local/etc/php-fpm.d/www.conf \
-&& sed -i 's/pm.max_children/pm.max_children=50 ;/' $tmp \
-&& sed -i 's/pm.start_servers/pm.start_servers=20 ;/' $tmp \
-&& sed -i 's/pm.max_spare_servers/pm.max_spare_servers=20 ;/' $tmp
+&& sed -i 's/pm.max_children/pm.max_children=100 ;/' $tmp \
+&& sed -i 's/pm.start_servers/pm.start_servers=50 ;/' $tmp \
+&& sed -i 's/pm.max_spare_servers/pm.max_spare_servers=50 ;/' $tmp
 
 
 EXPOSE 9000

@@ -15,9 +15,17 @@ spec:
         app: influxdb
     spec:
       nodeName: ip-172-31-47-101
-      containers:
+        volumes:
+        - name: influxdb
+          hostPath:
+            path: /mnt/influxdb
+            type: DirectoryOrCreate
+        containers:
         - name: influxdb
           image: influxdb:1.8.3
+          volumeMounts:
+            - mountPath: /var/lib/influxdb
+              name: influxdb
           ports:
             - containerPort: 8086
               protocol: TCP

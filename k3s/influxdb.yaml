@@ -15,12 +15,12 @@ spec:
         app: influxdb
     spec:
       nodeName: ip-172-31-47-101
-        volumes:
+      volumes:
         - name: influxdb
           hostPath:
             path: /mnt/influxdb
             type: DirectoryOrCreate
-        containers:
+      containers:
         - name: influxdb
           image: influxdb:1.8.3
           volumeMounts:

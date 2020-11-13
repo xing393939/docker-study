@@ -61,11 +61,7 @@ spec:
     - host: ec2-161-189-129-94.cn-northwest-1.compute.amazonaws.com.cn
       http:
         paths:
-        - path: /write
-          backend:
-            serviceName: monitoring-influxdb
-            servicePort: 8086
-        - path: /query
+        - path: /write,/query
           backend:
             serviceName: monitoring-influxdb
             servicePort: 8086

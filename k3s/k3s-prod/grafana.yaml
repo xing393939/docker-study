@@ -47,7 +47,7 @@ metadata:
   name: ingress-grafana
 spec:
   rules:
-    - host: tool.ivu1314.com
+    - host: ec2-161-189-129-94.cn-northwest-1.compute.amazonaws.com.cn
       http:
         paths:
           - backend:

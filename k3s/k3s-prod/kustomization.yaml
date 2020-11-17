@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - grafana.yaml
   - influxdb.yaml
+  - go-mysql.yaml

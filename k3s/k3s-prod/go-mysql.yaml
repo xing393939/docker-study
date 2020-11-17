@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-mysql
+spec:
+  selector:
+    matchLabels:
+      app: go-mysql
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: go-mysql
+    spec:
+      containers:
+        - name: go-mysql
+          image: registry.cn-qingdao.aliyuncs.com/qinhan/simida:go-mysql
+          ports:
+            - containerPort: 8001
+      imagePullSecrets:
+        - name: my-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-go-mysql
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8001
+  selector:
+    app: go-mysql
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-go-mysql
+spec:
+  rules:
+    - host: ec2-161-189-129-94.cn-northwest-1.compute.amazonaws.com.cn
+      http:
+        paths:
+          - path: /common/
+            backend:
+              serviceName: service-go-mysql
+              servicePort: http

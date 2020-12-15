@@ -1,4 +1,4 @@
-FROM php:7.3-fpm-alpine3.12
+FROM skyapm/skywalking-php-7.3-fpm-alpine:latest
 WORKDIR /code
 RUN chown -R www-data:www-data /code
 
@@ -43,6 +43,9 @@ RUN tmp=/usr/local/etc/php-fpm.d/www.conf \
 && sed -i 's/pm.start_servers/pm.start_servers=50 ;/' $tmp \
 && sed -i 's/pm.max_spare_servers/pm.max_spare_servers=50 ;/' $tmp
 
+# skywalking
+RUN tmp=/usr/local/etc/php/conf.d/ext-skywalking.ini \
+&& sed -i 's/skywalking.grpc/skywalking.grpc = 161.189.129.94:11800 ;/' $tmp
 
 EXPOSE 9000
 

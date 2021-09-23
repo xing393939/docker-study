@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>1.gitlab-ci配置 · GitBook</title>
+        <title>4.gitlab-ci配置 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -122,7 +122,7 @@
                 <a href="2.html">
             
                     
-                    1.《Kubernetes in Action》
+                    2.《Kubernetes in Action》
             
                 </a>
             
@@ -135,7 +135,7 @@
                 <a href="3.html">
             
                     
-                    1.docker相关
+                    3.docker相关
             
                 </a>
             
@@ -148,7 +148,7 @@
                 <a href="4.html">
             
                     
-                    1.gitlab-ci配置
+                    4.gitlab-ci配置
             
                 </a>
             
@@ -161,7 +161,7 @@
                 <a href="5.html">
             
                     
-                    1.docker和kubernetes的网络
+                    5.docker和kubernetes的网络
             
                 </a>
             
@@ -174,7 +174,7 @@
                 <a href="6.html">
             
                     
-                    1.oci开放容器标准和cri容器运行时标准
+                    6.oci开放容器标准和cri容器运行时标准
             
                 </a>
             
@@ -212,7 +212,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >1.gitlab-ci配置</a>
+        <a href=".." >4.gitlab-ci配置</a>
     </h1>
 </div>
 
@@ -228,8 +228,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h3 id="gitlab-ci&#x914D;&#x7F6E;">gitlab-ci&#x914D;&#x7F6E;</h3>
-<h4 id="&#x57FA;&#x4E8E;-kubernetes">&#x57FA;&#x4E8E; kubernetes</h4>
-<h4 id="&#x57FA;&#x4E8E;-docker">&#x57FA;&#x4E8E; docker</h4>
+<h4 id="docker&#x4E0B;&#x5B89;&#x88C5;runner">docker&#x4E0B;&#x5B89;&#x88C5;runner</h4>
 <ol>
 <li><a href="https://lx1990.github.io/2018/07/31/gitlab+gitlab-runner%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85docker%E9%95%9C%E5%83%8F/" target="_blank">gitlab+gitlab-runner&#x5B9E;&#x73B0;&#x81EA;&#x52A8;&#x6253;&#x5305;docker&#x955C;&#x50CF;</a></li>
 </ol>
@@ -243,7 +242,7 @@ docker run -d --name gitlab-runner --restart always \
 docker exec -it gitlab-runner gitlab-runner register
 
 #&#x7B2C;&#x4E09;&#x6B65;&#xFF0C;vim /srv/gitlab-runner/config/config.toml&#xFF0C;&#x4FEE;&#x6539; privileged = true
-</code></pre><h4 id="&#x57FA;&#x4E8E;docker&#x7684;gitlab-ciyml">&#x57FA;&#x4E8E;docker&#x7684;.gitlab-ci.yml</h4>
+</code></pre><h4 id="&#x914D;&#x7F6E;gitlab-ciyml">&#x914D;&#x7F6E;.gitlab-ci.yml</h4>
 <pre><code>image: docker:18
 
 variables:
@@ -291,12 +290,12 @@ build:
 
             
                 
-                <a href="3.html" class="navigation navigation-prev " aria-label="Previous page: 1.docker相关">
+                <a href="3.html" class="navigation navigation-prev " aria-label="Previous page: 3.docker相关">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="5.html" class="navigation navigation-next " aria-label="Next page: 1.docker和kubernetes的网络">
+                <a href="5.html" class="navigation navigation-next " aria-label="Next page: 5.docker和kubernetes的网络">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -307,7 +306,7 @@ build:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.gitlab-ci配置","level":"1.5","depth":1,"next":{"title":"1.docker和kubernetes的网络","level":"1.6","depth":1,"path":"docs/5.md","ref":"docs/5.md","articles":[]},"previous":{"title":"1.docker相关","level":"1.4","depth":1,"path":"docs/3.md","ref":"docs/3.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/4.md","mtime":"2021-09-07T07:49:24.322Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-07T07:49:53.934Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"4.gitlab-ci配置","level":"1.5","depth":1,"next":{"title":"5.docker和kubernetes的网络","level":"1.6","depth":1,"path":"docs/5.md","ref":"docs/5.md","articles":[]},"previous":{"title":"3.docker相关","level":"1.4","depth":1,"path":"docs/3.md","ref":"docs/3.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/4.md","mtime":"2021-09-23T01:38:48.897Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-23T01:39:17.622Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

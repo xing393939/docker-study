@@ -43,10 +43,8 @@ kind: Ingress
 metadata:
   name: ingress-nginx
   annotations:
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/name: ManagedK8SSlbIntranet-ccd4dc67c35a44384adcf8058a3d4c8e9
-    alb.ingress.kubernetes.io/address-type: internet
-    alb.ingress.kubernetes.io/vswitch-ids: "vsw-2ze2y4paxx9ajdt85wda3,vsw-2zeukf50zb28eknxtl6kv"
+    service.beta.kubernetes.io/alicloud-loadbalancer-id: lb-2zeolfwyckxl5acangfch
+    service.beta.kubernetes.io/alicloud-loadbalancer-force-override-listeners: "true"
 spec:
   rules:
   - http:

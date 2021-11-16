@@ -30,14 +30,11 @@ kind: Service
 metadata:
   name: service-nginx
   labels:
-    app: genkey
 spec:
-  type: ClusterIP
   ports:
-    - name: http
-      port: 80
-      protocol: TCP
+    - port: 80
       targetPort: 80
+      protocol: TCP
   selector:
     app: express-app
 ---
@@ -45,12 +42,16 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: ingress-nginx
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/name: ManagedK8SSlbIntranet-ccd4dc67c35a44384adcf8058a3d4c8e9
+    alb.ingress.kubernetes.io/address-type: internet
+    alb.ingress.kubernetes.io/vswitch-ids: "vsw-2ze2y4paxx9ajdt85wda3,vsw-2zeukf50zb28eknxtl6kv"
 spec:
   rules:
-  - host: tool.ivu1314.com 
-    http:
+  - http:
       paths:
       - path: /nginx/
         backend:
           serviceName: service-nginx
-          servicePort: http
+          servicePort: 80

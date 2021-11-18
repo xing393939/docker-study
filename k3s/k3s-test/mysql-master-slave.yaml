@@ -1,0 +1,129 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-nas
+  labels:
+    alicloud-pvname: pv-nas
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  csi:
+    driver: nasplugin.csi.alibabacloud.com
+    volumeHandle: pv-nas
+    volumeAttributes:
+      server: "1825d4a3d0-hec6.cn-beijing.nas.aliyuncs.com"
+      path: "/csi"
+  mountOptions:
+    - nolock,tcp,noresvport
+    - vers=3
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nas-claim
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      alicloud-pvname: pv-nas
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql
+data:
+  master.cnf: |
+    [mysqld]
+    log-bin
+  slave.cnf: |
+    [mysqld]
+    super-read-only
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      initContainers:
+        - name: mysql
+          image: mysql:5.7
+          args:
+            - bash
+            - -c
+            - |
+              set -ex
+              [[ `hostname` =~ -([0-9]+)$ ]] || exit 1
+              ordinal=${BASH_REMATCH[1]}
+              basedir=/var/lib/mysql/mysql_${ordinal}
+              if [[ $ordinal -eq 0 ]] then
+                cp /etc/config-map/master.cnf /etc/mysql/conf.d
+                echo -e \nbasedir="${basedir}" >> /etc/mysql/conf.d/master.cnf
+              else
+                cp /etc/config-map/slave.cnf /etc/mysql/conf.d
+                echo -e \nbasedir="${basedir}" >> /etc/mysql/conf.d/slave.cnf
+              fi
+              mkdir -p $basedir
+          volumeMounts:
+            - name: persistent-storage
+              mountPath: /var/lib/mysql
+            - name: conf
+              mountPath: /etc/mysql/conf.d
+            - name: config-map
+              mountPath: /etc/config-map
+      containers:
+        - name: mysql
+          image: mysql:5.7
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+          env:
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "1"
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - bash
+                  - -c
+                  - |
+                    echo Hello from the postStart handler > /usr/share/message
+          volumeMounts:
+            - name: persistent-storage
+              mountPath: /var/lib/mysql
+            - name: conf
+              mountPath: /etc/mysql/conf.d
+            - name: config-map
+              mountPath: /etc/config-map
+          livenessProbe:
+            exec:
+              command: ["mysqladmin", "ping"]
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+      volumes:
+        - name: persistent-storage
+          persistentVolumeClaim:
+            claimName: nas-claim
+        - name: lib
+          emptyDir: {}
+        - name: conf
+          emptyDir: {}
+        - name: config-map
+          configMap:
+            name: mysql

@@ -44,6 +44,11 @@ data:
   slave.cnf: |
     [mysqld]
     super-read-only
+  start.sh: |
+    [[ `hostname` =~ -[1-9]$ ]] || exit 0
+    until mysql -e "select 1"; do sleep 1; done
+    mysql -e "show slave status" | grep Slave || exit 0
+    mysql -e "change master to master_host='mysql-0.mysql',master_user='root',master_password='';start slave;"
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -68,12 +73,12 @@ spec:
             - -c
             - |
               set -ex
-              ordinal=`hostname` | tr -cd "[0-9]"
+              ordinal=`hostname | tr -cd "[0-9]"`
               basedir=/mnt/mysql/mysql_${ordinal}
               if [[ $ordinal -eq 0 ]]; then
                 cp /etc/config-map/master.cnf /etc/mysql/mysql.conf.d
               else
-                cp /etc/config-map/slave.cnf /etc/mysql/conf.d
+                cp /etc/config-map/slave.cnf /etc/mysql/mysql.conf.d
               fi
               echo -e '[mysqld]\nserver-id='$((100 + $ordinal)) >> /etc/mysql/mysql.conf.d/server-id.cnf
               echo -e '\nbasedir='${basedir} >> /etc/mysql/mysql.conf.d/server-id.cnf
@@ -102,13 +107,8 @@ spec:
               exec:
                 command:
                   - bash
-                  - -c
-                  - |
-                    set -ex
-                    ordinal=`hostname` | tr -cd "[0-9]"
-                    if [[ $ordinal -ne 0 ]]; then
-                      until mysql -e "change master to master_host='mysql-0.mysql',master_user='root',master_password='';start slave;"; do sleep 1; done
-                    fi
+                  - -x
+                  - /etc/config-map/start.sh
           args:
             - "--ignore-db-dir=lost+found"
           ports:

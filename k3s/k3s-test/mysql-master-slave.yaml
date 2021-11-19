@@ -50,6 +50,7 @@ kind: StatefulSet
 metadata:
   name: mysql
 spec:
+  serviceName: mysql
   selector:
     matchLabels:
       app: mysql
@@ -60,27 +61,30 @@ spec:
         app: mysql
     spec:
       initContainers:
-        - name: mysql
+        - name: init-mysql
           image: mysql:5.7
           args:
             - bash
             - -c
             - |
               set -ex
-              [[ `hostname` =~ -([0-9]+)$ ]] || exit 1
-              ordinal=${BASH_REMATCH[1]}
-              basedir=/var/lib/mysql/mysql_${ordinal}
-              if [[ $ordinal -eq 0 ]] then
+              ordinal=`hostname | tr -cd "[0-9]"`
+              basedir=/mnt/mysql/mysql_${ordinal}
+              if [[ $ordinal -eq 0 ]]; then
                 cp /etc/config-map/master.cnf /etc/mysql/conf.d
-                echo -e \nbasedir="${basedir}" >> /etc/mysql/conf.d/master.cnf
+                echo -e '\nbasedir='${basedir} >> /etc/mysql/conf.d/master.cnf
+                echo -e '\ndatadir='${basedir}/data >> /etc/mysql/conf.d/master.cnf
               else
                 cp /etc/config-map/slave.cnf /etc/mysql/conf.d
-                echo -e \nbasedir="${basedir}" >> /etc/mysql/conf.d/slave.cnf
+                echo -e '\nbasedir='${basedir} >> /etc/mysql/conf.d/slave.cnf
+                echo -e '\ndatadir='${basedir}/data >> /etc/mysql/conf.d/slave.cnf
               fi
+              echo -e '[mysqld]\nserver-id='$((100 + $ordinal)) >> /etc/mysql/conf.d/server-id.cnf
               mkdir -p $basedir
           volumeMounts:
             - name: persistent-storage
-              mountPath: /var/lib/mysql
+              mountPath: /mnt/mysql
+              subPath: mysql
             - name: conf
               mountPath: /etc/mysql/conf.d
             - name: config-map
@@ -90,39 +94,33 @@ spec:
           image: mysql:5.7
           resources:
             limits:
-              memory: "512Mi"
-              cpu: "250m"
+              memory: "1024Mi"
+              cpu: "500m"
           env:
             - name: MYSQL_ALLOW_EMPTY_PASSWORD
               value: "1"
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - bash
-                  - -c
-                  - |
-                    echo Hello from the postStart handler > /usr/share/message
+          args:
+            - "--ignore-db-dir=lost+found"
+          ports:
+            - name: mysql
+              containerPort: 3306
           volumeMounts:
             - name: persistent-storage
-              mountPath: /var/lib/mysql
+              mountPath: /mnt/mysql
+              subPath: mysql
             - name: conf
               mountPath: /etc/mysql/conf.d
+            - name: mysql-conf-d
+              mountPath: /etc/mysql/mysql.conf.d
             - name: config-map
               mountPath: /etc/config-map
-          livenessProbe:
-            exec:
-              command: ["mysqladmin", "ping"]
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
       volumes:
         - name: persistent-storage
           persistentVolumeClaim:
             claimName: nas-claim
-        - name: lib
-          emptyDir: {}
         - name: conf
+          emptyDir: {}
+        - name: mysql-conf-d
           emptyDir: {}
         - name: config-map
           configMap:

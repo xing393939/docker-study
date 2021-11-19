@@ -47,8 +47,8 @@ data:
   start.sh: |
     [[ `hostname` =~ -[1-9]$ ]] || exit 0
     until mysql -e "select 1"; do sleep 1; done
-    mysql -e "show slave status" | grep Slave || exit 0
-    mysql -e "change master to master_host='mysql-0.mysql',master_user='root',master_password='';start slave;"
+    exec="change master to master_host='mysql-0.mysql',master_user='root',master_password='';start slave;"
+    mysql -e "show slave status" | grep Slave || mysql -e $exec
 ---
 apiVersion: apps/v1
 kind: StatefulSet

@@ -97,6 +97,10 @@ spec:
           env:
             - name: MYSQL_ALLOW_EMPTY_PASSWORD
               value: "1"
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
           args:
             - "--ignore-db-dir=lost+found"
           ports:
@@ -119,3 +123,16 @@ spec:
         - name: config-map
           configMap:
             name: mysql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  labels:
+spec:
+  ports:
+    - name: mysql
+      port: 3306
+  clusterIP: None
+  selector:
+    app: mysql

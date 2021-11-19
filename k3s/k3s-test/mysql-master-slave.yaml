@@ -72,14 +72,12 @@ spec:
               basedir=/mnt/mysql/mysql_${ordinal}
               if [[ $ordinal -eq 0 ]]; then
                 cp /etc/config-map/master.cnf /etc/mysql/conf.d
-                echo -e '\nbasedir='${basedir} >> /etc/mysql/conf.d/master.cnf
-                echo -e '\ndatadir='${basedir}/data >> /etc/mysql/conf.d/master.cnf
               else
                 cp /etc/config-map/slave.cnf /etc/mysql/conf.d
-                echo -e '\nbasedir='${basedir} >> /etc/mysql/conf.d/slave.cnf
-                echo -e '\ndatadir='${basedir}/data >> /etc/mysql/conf.d/slave.cnf
               fi
               echo -e '[mysqld]\nserver-id='$((100 + $ordinal)) >> /etc/mysql/conf.d/server-id.cnf
+              echo -e '\nbasedir='${basedir} >> /etc/mysql/conf.d/server-id.cnf
+              echo -e '\ndatadir='${basedir}/data >> /etc/mysql/conf.d/server-id.cnf
               mkdir -p $basedir
           volumeMounts:
             - name: persistent-storage

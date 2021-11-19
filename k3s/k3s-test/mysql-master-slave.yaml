@@ -44,6 +44,11 @@ data:
   slave.cnf: |
     [mysqld]
     super-read-only
+  start.sh: |
+    [[ `hostname` =~ -[1-9]$ ]] || exit 0
+    until mysql -e "select 1"; do sleep 1; done
+    mysql -e "show slave status" | grep Slave || exit 0
+    mysql -e "change master to master_host='mysql-0.mysql',master_user='root',master_password='';start slave;"
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -73,7 +78,7 @@ spec:
               if [[ $ordinal -eq 0 ]]; then
                 cp /etc/config-map/master.cnf /etc/mysql/mysql.conf.d
               else
-                cp /etc/config-map/slave.cnf /etc/mysql/conf.d
+                cp /etc/config-map/slave.cnf /etc/mysql/mysql.conf.d
               fi
               echo -e '[mysqld]\nserver-id='$((100 + $ordinal)) >> /etc/mysql/mysql.conf.d/server-id.cnf
               echo -e '\nbasedir='${basedir} >> /etc/mysql/mysql.conf.d/server-id.cnf
@@ -97,6 +102,13 @@ spec:
           env:
             - name: MYSQL_ALLOW_EMPTY_PASSWORD
               value: "1"
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - bash
+                  - -x
+                  - /etc/config-map/start.sh
           args:
             - "--ignore-db-dir=lost+found"
           ports:
@@ -119,3 +131,16 @@ spec:
         - name: config-map
           configMap:
             name: mysql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  labels:
+spec:
+  ports:
+    - name: mysql
+      port: 3306
+  clusterIP: None
+  selector:
+    app: mysql

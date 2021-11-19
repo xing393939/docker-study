@@ -71,20 +71,20 @@ spec:
               ordinal=`hostname | tr -cd "[0-9]"`
               basedir=/mnt/mysql/mysql_${ordinal}
               if [[ $ordinal -eq 0 ]]; then
-                cp /etc/config-map/master.cnf /etc/mysql/conf.d
+                cp /etc/config-map/master.cnf /etc/mysql/mysql.conf.d
               else
                 cp /etc/config-map/slave.cnf /etc/mysql/conf.d
               fi
-              echo -e '[mysqld]\nserver-id='$((100 + $ordinal)) >> /etc/mysql/conf.d/server-id.cnf
-              echo -e '\nbasedir='${basedir} >> /etc/mysql/conf.d/server-id.cnf
-              echo -e '\ndatadir='${basedir}/data >> /etc/mysql/conf.d/server-id.cnf
+              echo -e '[mysqld]\nserver-id='$((100 + $ordinal)) >> /etc/mysql/mysql.conf.d/server-id.cnf
+              echo -e '\nbasedir='${basedir} >> /etc/mysql/mysql.conf.d/server-id.cnf
+              echo -e '\ndatadir='${basedir}/data >> /etc/mysql/mysql.conf.d/server-id.cnf
               mkdir -p $basedir
           volumeMounts:
             - name: persistent-storage
               mountPath: /mnt/mysql
               subPath: mysql
-            - name: conf
-              mountPath: /etc/mysql/conf.d
+            - name: mysql-conf
+              mountPath: /etc/mysql/mysql.conf.d
             - name: config-map
               mountPath: /etc/config-map
       containers:
@@ -106,9 +106,7 @@ spec:
             - name: persistent-storage
               mountPath: /mnt/mysql
               subPath: mysql
-            - name: conf
-              mountPath: /etc/mysql/conf.d
-            - name: mysql-conf-d
+            - name: mysql-conf
               mountPath: /etc/mysql/mysql.conf.d
             - name: config-map
               mountPath: /etc/config-map
@@ -116,9 +114,7 @@ spec:
         - name: persistent-storage
           persistentVolumeClaim:
             claimName: nas-claim
-        - name: conf
-          emptyDir: {}
-        - name: mysql-conf-d
+        - name: mysql-conf
           emptyDir: {}
         - name: config-map
           configMap:

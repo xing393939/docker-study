@@ -68,7 +68,7 @@ spec:
             - -c
             - |
               set -ex
-              ordinal=`hostname | tr -cd "[0-9]"`
+              ordinal=`hostname` | tr -cd "[0-9]"
               basedir=/mnt/mysql/mysql_${ordinal}
               if [[ $ordinal -eq 0 ]]; then
                 cp /etc/config-map/master.cnf /etc/mysql/mysql.conf.d
@@ -100,7 +100,15 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
+                command:
+                  - bash
+                  - -c
+                  - |
+                    set -ex
+                    ordinal=`hostname` | tr -cd "[0-9]"
+                    if [[ $ordinal -ne 0 ]]; then
+                      until mysql -e "change master to master_host='mysql-0.mysql',master_user='root',master_password='';start slave;"; do sleep 1; done
+                    fi
           args:
             - "--ignore-db-dir=lost+found"
           ports:

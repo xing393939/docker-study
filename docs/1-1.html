@@ -460,11 +460,35 @@
 <li>&#x5916;&#x754C;&#x5982;&#x4F55;&#x8BBF;&#x95EE;kubernetes&#x96C6;&#x7FA4;&#x7684;service&#xFF1A;<ol>
 <li>spec.type=NodePort&#xFF1A;&#x8BBF;&#x95EE;&#x4EFB;&#x4F55;&#x4E00;&#x53F0;&#x5BBF;&#x4E3B;&#x673A;&#x7684;IP&#x5747;&#x53EF;</li>
 <li>spec.type=LoadBalancer&#xFF1A;&#x9002;&#x5408;&#x516C;&#x6709;&#x4E91;&#xFF0C;&#x81EA;&#x52A8;&#x521B;&#x5EFA;LB&#xFF0C;&#x5E76;&#x628A;Pod&#x7684;IP&#x914D;&#x7F6E;&#x7ED9;LB</li>
-<li>Ingress&#xFF1A;&#x53EA;&#x9700;&#x8981;&#x4E00;&#x4E2A;LB&#x63A5;&#x4E0A;Ingress&#xFF0C;&#x914D;&#x7F6E;&#x89C4;&#x5219;&#x8F6C;&#x53D1;&#x5230;&#x4E0D;&#x540C;&#x7684;service&#x4E0A;<ul>
-<li>Nginx&#x3001;HAProxy&#x3001;Envoy&#x3001;Traefik&#x90FD;&#x6709;&#x5BF9;&#x5E94;&#x7684;Ingress Controller</li>
+<li>Ingress&#xFF1A;&#x53EA;&#x9700;&#x8981;&#x4E00;&#x4E2A;LB&#x63A5;&#x4E0A;Ingress&#xFF0C;&#x914D;&#x7F6E;&#x89C4;&#x5219;&#x8F6C;&#x53D1;&#x5230;&#x4E0D;&#x540C;&#x7684;service&#x4E0A;&#x3002;Nginx&#x3001;HAProxy&#x3001;Envoy&#x3001;Traefik&#x90FD;&#x6709;&#x5BF9;&#x5E94;&#x7684;Ingress Controller</li>
+</ol>
+</li>
+</ul>
+<h4 id="&#x7B2C;8&#x7AE0;-&#x8D44;&#x6E90;&#x7BA1;&#x7406;&#x548C;&#x8D44;&#x6E90;&#x8C03;&#x5EA6;">&#x7B2C;8&#x7AE0; &#x8D44;&#x6E90;&#x7BA1;&#x7406;&#x548C;&#x8D44;&#x6E90;&#x8C03;&#x5EA6;</h4>
+<ul>
+<li>Pod&#x7684;spec.containers.0.resources&#xFF1A;limits&#x8868;&#x793A;&#x6700;&#x9AD8;&#x914D;&#x7F6E;&#xFF0C;requests&#x662F;&#x6700;&#x4F4E;&#x914D;&#x7F6E;</li>
+<li>&#x5F53;Eviction&#x53D1;&#x751F;&#x65F6;&#xFF0C;&#x5220;&#x9664;Pod&#x7684;&#x987A;&#x5E8F;<ul>
+<li>&#x9996;&#x5148;&#x662F;BestEffort&#x7C7B;&#x578B;&#xFF1A;&#x6CA1;&#x6709;&#x8BBE;&#x7F6E;requests&#x548C;limits</li>
+<li>&#x5176;&#x6B21;&#x662F;BurstAble&#x7C7B;&#x522B;&#xFF1A;&#x4E0D;&#x6EE1;&#x8DB3;Guaranteed&#x6761;&#x4EF6;&#xFF0C;&#x4F46;&#x81F3;&#x5C11;&#x6709;&#x4E00;&#x4E2A;Container&#x8BBE;&#x7F6E;&#x4E86;requests</li>
+<li>&#x6700;&#x540E;&#x662F;Guaranteed&#x7C7B;&#x522B;&#xFF1A;&#x540C;&#x65F6;&#x8BBE;&#x7F6E;requests&#x548C;limits&#xFF0C;&#x5E76;&#x4E14;requests&#x548C;limit&#x503C;&#x76F8;&#x7B49;</li>
 </ul>
 </li>
+<li>&#x9ED8;&#x8BA4;&#x8C03;&#x5EA6;&#x5668;kube-scheduler&#x7684;&#x9884;&#x9009;&#x8C03;&#x5EA6;&#x7B56;&#x7565;&#xFF1A;<ol>
+<li>GeneralPredicates&#xFF1A;&#x68C0;&#x67E5;&#x8282;&#x70B9;&#x7684;CPU&#x548C;&#x5185;&#x5B58;&#x8D44;&#x6E90;</li>
+<li>Volume&#x76F8;&#x5173;&#xFF1A;&#x5982;EBS&#x4E0D;&#x80FD;&#x540C;&#x65F6;&#x88AB;&#x4E24;&#x4E2A;Pod&#x4F7F;&#x7528;</li>
+<li>&#x5BBF;&#x4E3B;&#x673A;&#x76F8;&#x5173;&#xFF1A;&#x5982;Node&#x7684;&#x6C61;&#x70B9;&#x673A;&#x5236;</li>
+<li>Pod&#x76F8;&#x5173;&#xFF1A;&#x4EB2;&#x5BC6;&#x6027;&#x548C;&#x53CD;&#x4EB2;&#x5BC6;</li>
 </ol>
+</li>
+<li>&#x9ED8;&#x8BA4;&#x8C03;&#x5EA6;&#x5668;kube-scheduler&#x7684;&#x4F18;&#x5148;&#x7B56;&#x7565;&#xFF1A;<ul>
+<li>&#x7ED9;&#x7B26;&#x5408;&#x9884;&#x9009;&#x89C4;&#x5219;&#x7684;&#x8282;&#x70B9;&#x6253;&#x5206;&#xFF0C;&#x8303;&#x56F4;&#x662F;0~10&#x5206;</li>
+</ul>
+</li>
+<li>&#x8BBE;&#x7F6E;Pod&#x7684;&#x4F18;&#x5148;&#x7EA7;&#xFF1A;<ul>
+<li>&#x5148;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x4F18;&#x5148;&#x7EA7;&#xFF1A;kind=PriorityClass</li>
+<li>&#x8BBE;&#x7F6E;Pod&#x7684;spec.priorityClassName</li>
+<li>&#x9AD8;&#x4F18;&#x5148;&#x7EA7;&#x7684;Pod&#x4F1A;&#x4F18;&#x5148;&#x8C03;&#x5EA6;</li>
+</ul>
 </li>
 </ul>
 
@@ -510,7 +534,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1-1.《Kubernetes 深入剖析》","level":"1.2","depth":1,"next":{"title":"1-2.《Kubernetes in Action》","level":"1.3","depth":1,"path":"docs/1-2.md","ref":"docs/1-2.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/1-1.md","mtime":"2021-12-14T12:10:30.881Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-14T12:11:05.159Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1-1.《Kubernetes 深入剖析》","level":"1.2","depth":1,"next":{"title":"1-2.《Kubernetes in Action》","level":"1.3","depth":1,"path":"docs/1-2.md","ref":"docs/1-2.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/1-1.md","mtime":"2021-12-15T08:00:52.435Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-15T08:01:20.162Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

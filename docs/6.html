@@ -246,13 +246,11 @@
 <li>OCI&#xFF1A;Open Container Initiative&#xFF0C;&#x5BB9;&#x5668;&#x8FD0;&#x884C;&#x6807;&#x51C6;&#xFF0C;&#x5206;&#x4E3A;Image Specification&#x548C;Runtime Specification<ol>
 <li>Image Specification&#xFF1A;&#x538B;&#x7F29;&#x7684;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x6587;&#x4EF6;&#x5939;&#x91CC;&#x4EE5; xxx &#x7ED3;&#x6784;&#x653E; xxx &#x6587;&#x4EF6;</li>
 <li>Runtime Specification&#xFF1A;&#x80FD;&#x63A5;&#x6536;&#x54EA;&#x4E9B;&#x6307;&#x4EE4;&#xFF08;create&#x3001;start&#x3001;stop&#xFF09;&#xFF0C;&#x8FD9;&#x4E9B;&#x6307;&#x4EE4;&#x7684;&#x884C;&#x4E3A;&#x662F;&#x4EC0;&#x4E48;</li>
-<li>OCI&#x7684;&#x5B9E;&#x73B0;&#xFF1A;runC&#x3001;kata</li>
 </ol>
 </li>
 <li>CRI&#xFF1A;Container Runtime Interface&#xFF0C;&#x5BB9;&#x5668;&#x8FD0;&#x884C;&#x65F6;&#x6807;&#x51C6;&#xFF0C;k8s&#x7684;1.5+&#x5F00;&#x59CB;&#x4F7F;&#x7528;<ol>
 <li><a href="https://cri-o.io/" target="_blank">cri-o</a>: &#x652F;&#x6301; CRI &#x7684;&#x8F7B;&#x91CF;&#x7EA7; container runtime&#xFF1B;</li>
 <li><a href="https://github.com/kubernetes-incubator/rktlet" target="_blank">rktlet</a>&#xFF1A;&#x652F;&#x6301; rtk &#x7684; CRI&#xFF08;rkt &#x4E0D;&#x652F;&#x6301; OCI&#xFF09;&#xFF1B;</li>
-<li><a href="https://github.com/kubernetes/frakti" target="_blank">frakti</a>&#xFF1A;&#x652F;&#x6301; hypervisor &#x7684; CRI&#xFF1B;</li>
 <li><a href="https://github.com/containerd/cri" target="_blank">cri-containerd</a>&#xFF1A;&#x652F;&#x6301; containerd &#x7684; CRI&#x3002;</li>
 </ol>
 </li>
@@ -267,10 +265,9 @@
 <h4 id="k8s&#x89E3;&#x8026;docker&#x4F9D;&#x8D56;&#x7684;&#x8FC7;&#x7A0B;">k8s&#x89E3;&#x8026;docker&#x4F9D;&#x8D56;&#x7684;&#x8FC7;&#x7A0B;</h4>
 <ol>
 <li><a href="https://xuanwo.io/2019/08/06/oci-intro/" target="_blank">&#x5F00;&#x653E;&#x5BB9;&#x5668;&#x6807;&#x51C6;OCI&#x5185;&#x90E8;&#x5206;&#x4EAB;</a></li>
-<li>docker-manager</li>
 <li>cri -&gt; dockershim</li>
 <li>cri -&gt; cri-containerd -&gt; containerd</li>
-<li>cri -&gt; containerd&#xFF08;&#x5185;&#x7F6E;cri-containerd&#xFF09;&#xFF0C;containerd&gt;=1.1&#xFF0C;Kubernetes&gt;=1.10&#xFF0C;pod&#x7684;&#x542F;&#x52A8;&#x5EF6;&#x8FDF;&#x3001;CPU&#x3001;&#x5185;&#x5B58;&#x5360;&#x7528;&#x7387;&#x90FD;&#x5F97;&#x5230;&#x4F18;&#x5316;</li>
+<li>cri -&gt; containerd&#xFF08;&#x5185;&#x7F6E;cri-containerd&#xFF09;&#xFF0C;&#x8981;&#x6C42;Kubernetes&gt;=1.10&#xFF0C;pod&#x7684;&#x542F;&#x52A8;&#x5EF6;&#x8FDF;&#x3001;CPU&#x3001;&#x5185;&#x5B58;&#x5360;&#x7528;&#x7387;&#x90FD;&#x5F97;&#x5230;&#x4F18;&#x5316;</li>
 </ol>
 <h4 id="low-level-&#x548C;-high-level-&#x5BB9;&#x5668;&#x8FD0;&#x884C;&#x65F6;">Low-Level &#x548C; High-Level &#x5BB9;&#x5668;&#x8FD0;&#x884C;&#x65F6;</h4>
 <ol>
@@ -333,7 +330,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"6.oci开放容器标准和cri容器运行时标准","level":"1.8","depth":1,"previous":{"title":"5.docker和kubernetes的网络","level":"1.7","depth":1,"path":"docs/5.md","ref":"docs/5.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/6.md","mtime":"2021-12-15T08:00:52.435Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-15T08:01:20.162Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"6.oci开放容器标准和cri容器运行时标准","level":"1.8","depth":1,"previous":{"title":"5.docker和kubernetes的网络","level":"1.7","depth":1,"path":"docs/5.md","ref":"docs/5.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/6.md","mtime":"2021-12-16T02:47:54.290Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-16T02:48:18.425Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

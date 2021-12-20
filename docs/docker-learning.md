@@ -11,12 +11,6 @@
 1. vim /etc/docker/daemon.json，加上{"dns": ["114.114.114.114"]}
 1. 查看生效没有：docker run -it --rm busybox cat /etc/resolv.conf
 
-#### nginx+fpm
-1. docker build -t image-php-fpm .
-1. docker run --name container-php-fpm -p 9000:9000 -d image-php-fpm
-1. docker build -t image-ng .
-1. docker run --name container-ng -p 70:70 --link container-php-fpm:localhost -d image-ng
-
 #### docker 跨主机网络：overlay 简介
 1. [再说docker及云中的网络连接](https://ying-zhang.github.io/cloud/2016/vm-net-2/)，介绍了overlay的历史
 1. [“深入浅出”来解读Docker网络核心原理](https://blog.51cto.com/ganbing/2087598)，讲了沙盒、端点、overlay驱动

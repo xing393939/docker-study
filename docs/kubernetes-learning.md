@@ -1,4 +1,4 @@
-### k8s基础
+### Kubernetes 基础
 
 #### 参考资料
 1. [kubernetes handbook](https://jimmysong.io/kubernetes-handbook/concepts/objects.html)，k8s的资源对象

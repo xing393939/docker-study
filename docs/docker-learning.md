@@ -60,6 +60,7 @@ docker network connect my_bridge container-nginx
 1. COPY 和 ADD，ADD 多了一个功能，如果是src是url可以下载它
 1. WORKDIR 和 CD：CD 只对当前行命令有效，WORKDIR 则是整体改变目录
 1. ARG 和 ENV：ARG 在镜像编译时起作用，ENV 在镜像编译、运行时都起作用，其实就是环境变量
+1. EXPOSE 仅仅是声明容器打算使用什么端口而已，并不会自动在宿主进行端口映射
 
 #### 容器内安装telnet等
 ```

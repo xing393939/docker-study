@@ -117,10 +117,12 @@
     * flanneld把IP包封装成UDP包发给宿主机2的8025端口，即flanneld进程
     * 需要经过3次用户态-内核态的数据复制
   * VXLAN模式：容器1——docker0——flannel.1(VTEP设备)——宿主机1(eth0)
+    * [七张图带你搞懂 Kubernetes Flannel 高性能网络插件的两种常用工作模式](https://os.51cto.com/art/202112/693234.htm)
     * 每个宿主机启动并加入flannel网络后，会在所有宿主机上记录路由规则和ARP记录
     * flannel.1收到Ip包后会进行两次封装，最后组成UDP发给宿主机2
-    * 如何知道宿主机2的mac地址？通过ARP记录
-    * 如何知道宿主机2的ip地址？通过FDB(forwarding database)
+    * 如何知道宿主机2的mac地址？通过ARP表
+    * 如何知道宿主机2的ip地址？通过FDB(forwarding database)表
+    * 主机的route表、ARP表、FDB表由flanneld来维护
     * 为什么用UDP包？因为这是在数据链路层，上层的TCP会保证数据的完整性
     * 性能损失在20%~30%
   * host-gw模式：容器1——cni0——宿主机1(eth0)

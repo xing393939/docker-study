@@ -104,7 +104,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="docker-learning.html">
+        <li class="chapter " data-level="1.2" data-path="service-mesh.html">
+            
+                <a href="service-mesh.html">
+            
+                    
+                    0.服务网格
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="docker-learning.html">
             
                 <a href="docker-learning.html">
             
@@ -117,7 +130,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="gitlab-ci.html">
+        <li class="chapter " data-level="1.4" data-path="gitlab-ci.html">
             
                 <a href="gitlab-ci.html">
             
@@ -130,7 +143,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="kubernetes-learning.html">
+        <li class="chapter " data-level="1.5" data-path="kubernetes-learning.html">
             
                 <a href="kubernetes-learning.html">
             
@@ -143,7 +156,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5" data-path="kubernetes-in-depth.html">
+        <li class="chapter active" data-level="1.6" data-path="kubernetes-in-depth.html">
             
                 <a href="kubernetes-in-depth.html">
             
@@ -156,7 +169,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="kubernetes-in-action.html">
+        <li class="chapter " data-level="1.7" data-path="kubernetes-in-action.html">
             
                 <a href="kubernetes-in-action.html">
             
@@ -169,7 +182,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="docker-network.html">
+        <li class="chapter " data-level="1.8" data-path="docker-network.html">
             
                 <a href="docker-network.html">
             
@@ -182,7 +195,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="oci-cri.html">
+        <li class="chapter " data-level="1.9" data-path="oci-cri.html">
             
                 <a href="oci-cri.html">
             
@@ -410,10 +423,12 @@
 </ul>
 </li>
 <li>VXLAN&#x6A21;&#x5F0F;&#xFF1A;&#x5BB9;&#x5668;1&#x2014;&#x2014;docker0&#x2014;&#x2014;flannel.1(VTEP&#x8BBE;&#x5907;)&#x2014;&#x2014;&#x5BBF;&#x4E3B;&#x673A;1(eth0)<ul>
+<li><a href="https://os.51cto.com/art/202112/693234.htm" target="_blank">&#x4E03;&#x5F20;&#x56FE;&#x5E26;&#x4F60;&#x641E;&#x61C2; Kubernetes Flannel &#x9AD8;&#x6027;&#x80FD;&#x7F51;&#x7EDC;&#x63D2;&#x4EF6;&#x7684;&#x4E24;&#x79CD;&#x5E38;&#x7528;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;</a></li>
 <li>&#x6BCF;&#x4E2A;&#x5BBF;&#x4E3B;&#x673A;&#x542F;&#x52A8;&#x5E76;&#x52A0;&#x5165;flannel&#x7F51;&#x7EDC;&#x540E;&#xFF0C;&#x4F1A;&#x5728;&#x6240;&#x6709;&#x5BBF;&#x4E3B;&#x673A;&#x4E0A;&#x8BB0;&#x5F55;&#x8DEF;&#x7531;&#x89C4;&#x5219;&#x548C;ARP&#x8BB0;&#x5F55;</li>
 <li>flannel.1&#x6536;&#x5230;Ip&#x5305;&#x540E;&#x4F1A;&#x8FDB;&#x884C;&#x4E24;&#x6B21;&#x5C01;&#x88C5;&#xFF0C;&#x6700;&#x540E;&#x7EC4;&#x6210;UDP&#x53D1;&#x7ED9;&#x5BBF;&#x4E3B;&#x673A;2</li>
-<li>&#x5982;&#x4F55;&#x77E5;&#x9053;&#x5BBF;&#x4E3B;&#x673A;2&#x7684;mac&#x5730;&#x5740;&#xFF1F;&#x901A;&#x8FC7;ARP&#x8BB0;&#x5F55;</li>
-<li>&#x5982;&#x4F55;&#x77E5;&#x9053;&#x5BBF;&#x4E3B;&#x673A;2&#x7684;ip&#x5730;&#x5740;&#xFF1F;&#x901A;&#x8FC7;FDB(forwarding database)</li>
+<li>&#x5982;&#x4F55;&#x77E5;&#x9053;&#x5BBF;&#x4E3B;&#x673A;2&#x7684;mac&#x5730;&#x5740;&#xFF1F;&#x901A;&#x8FC7;ARP&#x8868;</li>
+<li>&#x5982;&#x4F55;&#x77E5;&#x9053;&#x5BBF;&#x4E3B;&#x673A;2&#x7684;ip&#x5730;&#x5740;&#xFF1F;&#x901A;&#x8FC7;FDB(forwarding database)&#x8868;</li>
+<li>&#x4E3B;&#x673A;&#x7684;route&#x8868;&#x3001;ARP&#x8868;&#x3001;FDB&#x8868;&#x7531;flanneld&#x6765;&#x7EF4;&#x62A4;</li>
 <li>&#x4E3A;&#x4EC0;&#x4E48;&#x7528;UDP&#x5305;&#xFF1F;&#x56E0;&#x4E3A;&#x8FD9;&#x662F;&#x5728;&#x6570;&#x636E;&#x94FE;&#x8DEF;&#x5C42;&#xFF0C;&#x4E0A;&#x5C42;&#x7684;TCP&#x4F1A;&#x4FDD;&#x8BC1;&#x6570;&#x636E;&#x7684;&#x5B8C;&#x6574;&#x6027;</li>
 <li>&#x6027;&#x80FD;&#x635F;&#x5931;&#x5728;20%~30%</li>
 </ul>
@@ -584,7 +599,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"4.《Kubernetes 深入剖析》","level":"1.5","depth":1,"next":{"title":"5.《Kubernetes in Action》","level":"1.6","depth":1,"path":"docs/kubernetes-in-action.md","ref":"docs/kubernetes-in-action.md","articles":[]},"previous":{"title":"3.kubernetes 基础","level":"1.4","depth":1,"path":"docs/kubernetes-learning.md","ref":"docs/kubernetes-learning.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/kubernetes-in-depth.md","mtime":"2021-12-29T02:12:06.712Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-29T02:12:35.032Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"4.《Kubernetes 深入剖析》","level":"1.6","depth":1,"next":{"title":"5.《Kubernetes in Action》","level":"1.7","depth":1,"path":"docs/kubernetes-in-action.md","ref":"docs/kubernetes-in-action.md","articles":[]},"previous":{"title":"3.kubernetes 基础","level":"1.5","depth":1,"path":"docs/kubernetes-learning.md","ref":"docs/kubernetes-learning.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/kubernetes-in-depth.md","mtime":"2022-01-06T09:10:21.657Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-01-06T09:10:54.263Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

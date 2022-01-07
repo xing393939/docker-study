@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-nginx-alb
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/address-type: internet
+    alb.ingress.kubernetes.io/vswitch-ids: "vsw-2ze2y4paxx9ajdt85wda3,vsw-2zeukf50zb28eknxtl6kv"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /nginx/
+            backend:
+              serviceName: service-nginx
+              servicePort: 443

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: express-app
-        image: registry.cn-qingdao.aliyuncs.com/qinhan/simida:nginx-test
+        image: nginx
         resources:
           limits:
             memory: "512Mi"
@@ -35,6 +35,11 @@ spec:
     - port: 80
       targetPort: 80
       protocol: TCP
+      name: http
+    - port: 443
+      targetPort: 80
+      protocol: TCP
+      name: https
   selector:
     app: express-app
 ---
@@ -43,7 +48,7 @@ kind: Ingress
 metadata:
   name: ingress-nginx
   annotations:
-    service.beta.kubernetes.io/alicloud-loadbalancer-id: lb-2zeolfwyckxl5acangfch
+    service.beta.kubernetes.io/alicloud-loadbalancer-id: lb-2zefjekvhp8v1jvcf88tt
     service.beta.kubernetes.io/alicloud-loadbalancer-force-override-listeners: "true"
 spec:
   rules:

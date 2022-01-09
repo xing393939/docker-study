@@ -34,6 +34,34 @@
 * 无服务时代：后端设施（数据库、消息队列、日志、存储等）和函数
 
 #### 第二部分，架构师的视角（理清分布式系统中新的挑战与应对）
+* 访问远程服务
+  * 进程间通讯：管道、信号、信号量、消息队列、共享内存、UnixDomainSocket
+  * RPC的三个问题：如何表示数据(JSON/Protocol Buffer)、如何传递数据(SOAP/Http)、如何确定方法(WSDL/JSON-WSP)
+* RPC经历的几个阶段：
+  * W3C Web Service：除了SOAP\WSDL\UDDI外，还有解决事务、一致性、事件、通知的协议。协议太复杂，对开发者是负担
+  * 不再最求大而全，分裂的RPC：
+    * 朝着面向对象发展
+    * 朝着性能发展：gRPC基于Protocol Buffer和Http2、Thrift是自己的序列化和基于TCP协议
+    * 朝着简化发展：JSON-RPC
+  * 不仅仅负责调用远程服务，还负责管理远程服务(负载均衡、服务注册、可观察性等等)
+  * （分布式系统真的需要RPC来调用本地方法吗？其实只要能提供服务就行了）
+* REST风格的不足和争议：
+  * 登录和注销接口：抽象化一个session资源，登录是put、注销是delete
+  * 自定义方法：[Google的REST](https://google-cloud.gitbook.io/api-design-guide/custom_methods)常用自定义方法有cancel/batchGet/move/search/undelete
+  * 只查询用户的名称：REST默认返回用户的所有字段，实现此功能可以这样users/12?fields=name
+  * 批量给1000个用户名加vip前缀：抽象化一个资源VIP-Modify-Task，然后传1000个用户id
+  * 购物下单接口：涉及多个资源(用户、订单、库存、积分)的修改，抽象化一个资源来表示这个流程
+* 事务处理之本地事务：靠支持事务的数据源如InnoDB来支持
+* 事务处理之分布式事务
+  * [分布式系统中的一致性与共识算法](http://www.xuyasong.com/?p=1970)
+  * ACID专注于分布式事务；CAP和BASE是分布式通用理论
+  * 2PC用于保证多个数据分片上事务的原子性，Paxos协议用于保证同一个数据在多个副本的一致性，两者是互补关系
+  * 2PC的协调者可以通过Paxos协议来选出
+  * 2PC和TCC
+    * 2PC：准备阶段所有节点写redo日志和加锁，提交阶段所有节点commit
+    * TCC(Try-Confirm-Cancel)：对业务有侵入性，在Try阶段对数据做冻结，Cancel阶段对数据做恢复
+* 透明多级分流系统
+* 架构安全性
 
 #### 第三部分，分布式的基石（如何隐藏技术细节使其不会干扰业务）
 

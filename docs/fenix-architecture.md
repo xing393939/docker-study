@@ -61,8 +61,27 @@
     * 2PC：准备阶段所有节点写redo日志和加锁，提交阶段所有节点commit
     * TCC(Try-Confirm-Cancel)：对业务有侵入性，在Try阶段对数据做冻结，Cancel阶段对数据做恢复
 * 透明多级分流系统
+  * [浏览器缓存原理](https://learnku.com/articles/43143)，浏览器先检查Cache-Control/Expire，过期则带上If-None-Match/If-Modified-Since请求服务器
+  * 域名解析，有TTL缓存时间
+  * 传输链路：H2之前使用雪碧图等等；Gzip压缩；使用H2或者H3
+  * 内容分发：域名别名指向CDN厂商的glsb；CDN的主动推送或者被动回源
+  * 负载均衡之mac层：三角传输(LB和server使用同一虚拟ip)，需在二层网络
+  * 负载均衡之ip层：
+    * 方案1：三角传输(LB和server使用同一虚拟ip，使用IP隧道)，非二层网络也行
+    * 方案2：NAT模式，LB修改dIP把流量转发给server，server需配置网关地址为LB
+    * 方案3：SNAT模式，LB修改dIP把流量转发给server(同时修改sIP为LB自己)，好处是server不需要配置网关，坏处是server看不到真实ip
+  * 负载均衡之传输层：同ip层，可以根据传输协议(tcp/udp)转发
+  * 负载均衡之应用层：nginx、haproxy
+  * 服务器缓存：缓存淘汰策略(lru/lfu)，缓存穿透(db记录不存在)、缓存击穿(缓存过期了)、雪崩(db压力陡增)  
 * 架构安全性
-
+  * OAuth2.0授权
+    * 授权码模式：需要有自己的应用服务器，与授权服务器交互2次，一次拿授权码，一次拿token
+    * 隐式授权模式：不需要有自己的应用服务器，通过授权服务器跳转回的url拿token，例如gtalk
+    * 密码模式：用户带用户名密码请求应用服务器，应用服务器带用户名密码请求授权服务器，要求应用服务器、授权服务器属于同一公司
+    * 客户端模式：应用服务器直接通过clientId、clientSecret请求授权服务器获得token
+  * 凭证：一般用session或者jwt
+  * 传输：https
+    
 #### 第三部分，分布式的基石（如何隐藏技术细节使其不会干扰业务）
 
 #### 第四部分 不可变基础设施

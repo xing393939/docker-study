@@ -1,4 +1,14 @@
 # 阿里的ask需要先设置NAT才能访问外网：https://help.aliyun.com/document_detail/99146.html
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: 2016-02-18T18:52:05Z
+  name: config-map
+data:
+  index.html: |
+    hello
+    <b>world<b>
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -13,15 +23,22 @@ spec:
       labels:
         app: express-app
     spec:
+      volumes:
+        - name: volume-config
+          configMap:
+            name: config-map
       containers:
-      - name: express-app
-        image: nginx
-        resources:
-          limits:
-            memory: "512Mi"
-            cpu: "250m"
-        ports:
-        - containerPort: 80
+        - name: express-app
+          image: nginx:1.15-alpine
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: volume-config
+              mountPath: /usr/share/nginx/html/nginx
       imagePullSecrets:
         - name: my-secret
 ---
@@ -48,13 +65,13 @@ kind: Ingress
 metadata:
   name: ingress-nginx
   annotations:
-    service.beta.kubernetes.io/alicloud-loadbalancer-id: lb-2zefjekvhp8v1jvcf88tt
+    service.beta.kubernetes.io/alicloud-loadbalancer-id: lb-2zeck3xgr61ops6rhf4px
     service.beta.kubernetes.io/alicloud-loadbalancer-force-override-listeners: "true"
 spec:
   rules:
-  - http:
-      paths:
-      - path: /nginx/
-        backend:
-          serviceName: service-nginx
-          servicePort: 80
+    - http:
+        paths:
+          - path: /nginx/
+            backend:
+              serviceName: service-nginx
+              servicePort: 80

@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   creationTimestamp: 2016-02-18T18:52:05Z
-  name: config-map
+  name: nginx-demo-mp
 data:
   index.html: |
     hello
@@ -12,23 +12,23 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: express-app
+  name: nginx-demo-deploy
 spec:
   selector:
     matchLabels:
-      app: express-app
+      app: nginx-demo-pod
   replicas: 1
   template:
     metadata:
       labels:
-        app: express-app
+        app: nginx-demo-pod
     spec:
       volumes:
-        - name: volume-config
+        - name: nginx-demo-volume
           configMap:
-            name: config-map
+            name: nginx-demo-mp
       containers:
-        - name: express-app
+        - name: nginx-demo-pod
           image: nginx:1.15-alpine
           resources:
             limits:
@@ -37,7 +37,7 @@ spec:
           ports:
             - containerPort: 80
           volumeMounts:
-            - name: volume-config
+            - name: nginx-demo-volume
               mountPath: /usr/share/nginx/html/nginx
       imagePullSecrets:
         - name: my-secret
@@ -45,7 +45,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-nginx
+  name: nginx-demo
   labels:
 spec:
   ports:
@@ -58,12 +58,12 @@ spec:
       protocol: TCP
       name: https
   selector:
-    app: express-app
+    app: nginx-demo-pod
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ingress-nginx
+  name: nginx-demo-ing
   annotations:
     service.beta.kubernetes.io/alicloud-loadbalancer-id: lb-2zeck3xgr61ops6rhf4px
     service.beta.kubernetes.io/alicloud-loadbalancer-force-override-listeners: "true"
@@ -73,5 +73,5 @@ spec:
         paths:
           - path: /nginx/
             backend:
-              serviceName: service-nginx
+              serviceName: nginx-demo
               servicePort: 80

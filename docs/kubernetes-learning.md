@@ -59,12 +59,16 @@ k3s agent --server https://myserver:6443 --token ${NODE_TOKEN}
 ```
 
 #### k8s 的基础命令：
+1. [如何成功通过 CKA 考试](https://www.zhaohuabing.com/post/2021-12-20-how-to-prepare-cka/)
 1. yaml文件字段参考：https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/
 1. kubectl get pod //查看pod，加上-o wide可以获取更多列信息
 1. kubectl get node //查看node
 1. kubectl get all -n kube-system //查看所有kube-system空间的资源
 1. kubectl edit configmap traefik -n kube-system   //修改configMap
 1. kubectl delete pod traefik-758cd5fc85-smvd9     //删除pod（将自动重启一个新的）
+1. kubectl explain pod.spec.containers //查看yaml文件containers的配置说明
+1. kubectl run --help | head -n 30 //有大量创建pod的示例
+1. kubectl get pod | jq .items[].metadata.name //用jq来提取详细信息
 
 #### kubernetes 使用私有仓库
 1. [k8s拉取私库镜像](https://developer.aliyun.com/article/746670)

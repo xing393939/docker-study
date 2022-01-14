@@ -104,6 +104,14 @@
 * 流量控制之分布式限流：
   * 单机限流适合集群网关处的限流，可以用否决式和阻塞式
   * 分布式限流是控制集群内部服务的：来了一个请求，先从网关处领取X元，访问A服务消耗A元，访问B服务消耗B元，没钱了无法访问服务(或者再找网关要)
+* 可靠通讯：从“边界安全”到“零信任网络”
+* 可靠通讯服务认证的两种方式：
+  * 基于istio：可以配置针对某个namespace的所有流量开启mTLS
+  * 基于OAuth2.0的客户端模式：clientSecret通过启动参数传给服务
+* istio还提供终端用户认证和授权：
+  * [Istio安全架构--理解身份/认证/授权](https://blog.csdn.net/gengzhikui1992/article/details/115529831)
+  * [使用 Istio 进行 JWT 身份验证（充当 API 网关）](https://ryan4yin.space/posts/use-istio-for-jwt-auth/)
+* 可观察性：日志、追踪、聚合
 
 #### 第四部分 不可变基础设施
 

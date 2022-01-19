@@ -114,5 +114,29 @@
 * 可观察性：日志、追踪、聚合
 
 #### 第四部分 不可变基础设施
-
+* linux的进程隔离(七种)：
+  * Mount：隔离文件系统，chroot命令
+  * UTS：隔离主机的hostname
+  * IPC：隔离进程间通讯的渠道
+  * PID：无法看到其他namespace的进程
+  * Network：隔离网络，如网卡、网络栈、ip、端口等
+  * User：隔离用户和用户组
+  * Time：支持进程独立设置系统时间
+* linux的资源隔离：cgroups，隔离cpu、内存、块设备、其他设备、网卡
+* linux网络虚拟化：
+  * 内核控制了四层，提供socket接口给应用层
+  * netfilter框架的5个hook，iptables工具基于框架提供5个表
+  * 虚拟网络设备之tun/tap：tun相当于三层，tap相当于二层
+    * 物理网卡一端是物理网卡，一端是网络协议栈；虚拟网卡一端是用户态程序，一端是网络协议栈
+    * vpn程序就是利用的tun/tap
+  * 虚拟网络设备之veth pair：两个docker容器如果使用veth pair连接，不需要反复进入协议栈
+  * 虚拟网络设备之linux bridge：其实就一个虚拟交换机，bridge可以设置ip地址
+    * 比普通交换机多一个功能，当bridge接收的数据包mac和ip均是自己，即表示和宿主机通讯
+  * 虚拟网络之VXLAN：linux3.7支持
+    * 普通数据包=mac头+原始二层内容，VXLAN数据包=outer数据包+原始二层内容
+  * 虚拟网络之MACVLAN：一个网卡可以设置多个ip、多个mac
+  * 容器间通讯：
+    * 开箱即用的方案：bridge、host、none
+    * 用户自定义方案：container、MACVLAN、overlay(即VXLAN)
+  
 #### 技术方法论和随笔

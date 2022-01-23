@@ -82,7 +82,7 @@
   * 凭证：一般用session或者jwt
   * 传输：https
     
-#### 第三部分，分布式的基石（如何隐藏技术细节使其不会干扰业务）
+#### 第三部分，分布式的基石（解决分布式问题的思路、方法和工具）
 * 强一致性共识协议：
   * Paxos：任何节点都可以提案，所以需要解决“活锁”问题
   * Raft：先选主，只有主节点可以提案
@@ -113,7 +113,7 @@
   * [使用 Istio 进行 JWT 身份验证（充当 API 网关）](https://ryan4yin.space/posts/use-istio-for-jwt-auth/)
 * 可观察性：日志、追踪、聚合
 
-#### 第四部分 不可变基础设施
+#### 第四部分，不可变基础设施（如何隐藏技术细节使其不会干扰业务）
 * linux的进程隔离(七种)：
   * Mount：隔离文件系统，chroot命令
   * UTS：隔离主机的hostname
@@ -133,10 +133,34 @@
   * 虚拟网络设备之linux bridge：其实就一个虚拟交换机，bridge可以设置ip地址
     * 比普通交换机多一个功能，当bridge接收的数据包mac和ip均是自己，即表示和宿主机通讯
   * 虚拟网络之VXLAN：linux3.7支持
-    * 普通数据包=mac头+原始二层内容，VXLAN数据包=outer数据包+原始二层内容
+    * 普通数据包=mac头+原始二层内容，VXLAN数据包=outer数据包(udp+vxlan)+原始二层内容
   * 虚拟网络之MACVLAN：一个网卡可以设置多个ip、多个mac
   * 容器间通讯：
     * 开箱即用的方案：bridge、host、none
     * 用户自定义方案：container、MACVLAN、overlay(即VXLAN)
-  
-#### 技术方法论和随笔
+* 容器网络接口：docker提出的CNM落败，google提出的CNI胜出
+* 容器网络插件：
+  * Overlay模式：Flannel的VXLAN，Calico的IPIP
+  * 路由模式：Flannel的hostGW，Calico的BGP
+  * Underlay模式：MACVLAN、SR-IOV。
+    * 依赖硬件和底层网络环境，难以做到像Overlay那样开箱即用
+* 静态存储分配：运维预置好pv，开发声明pvc，k8s进行匹配
+* 动态存储分配：运维预置好sc，开发声明pvc和关联的sc，k8s通过sc生成pv再和pvc绑定
+* 容器存储接口：FlexVolume已经废弃，CSI胜出
+* 容器存储插件：从in-tree到out-tree
+* 资源与调度：
+  * 资源模型：一切皆为资源是声明式API的必要前提，资源分为物理资源(cpu、内存、存储)和抽象资源
+  * 服务质量和优先级：
+    * Guaranteed：requests=limits、
+    * BurstAble：requests<limits或者只设置了其中1个
+    * BestEffort：没有设置requests和limits
+  * 默认调度器：
+    * 调度器并不会直接与kubelet通讯来创建Pod，而是间接借助etcd
+    * 这些Informer持续监视etcd中它关心的资源变化，一旦发生变化，就更新调度队列
+    * Scheduler从调度队列中取任务并执行
+
+#### 第五部分，技术方法论（软件开发过程中的一些经验）
+
+
+#### 第六部分，随笔文章
+

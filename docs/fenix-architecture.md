@@ -158,6 +158,13 @@
     * 调度器并不会直接与kubelet通讯来创建Pod，而是间接借助etcd
     * 这些Informer持续监视etcd中它关心的资源变化，一旦发生变化，就更新调度队列
     * Scheduler从调度队列中取任务并执行
+* istio代理注入：对namespace设置了istio-injection=enabled标签的pod注入sidecar
+* istio流量劫持：
+  * [Service Mesh中的iptables流量劫持](https://www.ciocso.com/article/730.html)
+  * [istio学习笔记 - 1 （初探数据平面）](https://blog.csdn.net/weixin_43490818/article/details/89314360)
+  * [Istio中的透明代理问题](https://blog.gmem.cc/istio-tproxy)
+  * Istio对入站流量的两种拦截模式：REDIRECT(envoy和应用看到的都是127.0.0.1)、TPROXY(envoy能看到真实ip，应用看到的是127.0.0.1)
+* istio可靠通讯：把代理转发的行为规则抽象成三种资源：Listener、Cluster、Router
 
 #### 第五部分，技术方法论（软件开发过程中的一些经验）
 

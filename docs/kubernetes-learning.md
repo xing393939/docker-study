@@ -70,7 +70,7 @@ k3s agent --server https://myserver:6443 --token ${NODE_TOKEN}
 1. kubectl run --help | head -n 30 //有大量创建pod的示例
 1. kubectl get pod | jq .items[].metadata.name //用jq来提取详细信息
 1. [k8s args和command](https://www.e-learn.cn/topic/3101694)
-  * docker的enterpoint、cmd对应容器的command、args
+  * docker的entrypoint、cmd对应容器的command、args
 
 #### kubernetes 使用私有仓库
 1. [k8s拉取私库镜像](https://developer.aliyun.com/article/746670)

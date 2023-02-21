@@ -298,7 +298,7 @@ cat /etc/docker/daemon.json
   &quot;registry-mirrors&quot; : [
     &quot;https://tycwa26s.mirror.aliyuncs.com&quot;
   ],
-  &quot;insecure-registries&quot;:[&quot;192.168.2.120:5000&quot;],
+  &quot;insecure-registries&quot;: [&quot;192.168.2.120:5000&quot;],
   &quot;bip&quot;: &quot;172.18.0.1/16&quot;,
   &quot;dns&quot;: [&quot;114.114.114.114&quot;, &quot;8.8.8.8&quot;]
 }
@@ -307,14 +307,33 @@ docker network create --subnet=172.17.0.1/16 minidocker0
 
 # &#x4EE5;&#x4E0B;&#x5728;ubuntu&#x7528;&#x6237;&#x4E0B;&#x6267;&#x884C;
 sudo usermod -aG docker $USER &amp;&amp; newgrp docker
-minikube start --kubernetes-version=v1.23.8 --image-mirror-country=cn --network=minidocker0 --apiserver-ips=192.168.2.120 --insecure-registry=192.168.2.120:5000
+minikube start --kubernetes-version=v1.23.8 --image-mirror-country=cn --network=minidocker0 --apiserver-ips=192.168.2.120 --insecure-registry=192.168.2.120:5000 --addons=ingress
 
 # &#x8BBE;&#x7F6E;kubectl&#x7684;alias
 vim ~/.bashrc
 alias kubectl=&quot;minikube kubectl --&quot;
-</code></pre><h4 id="&#x914D;&#x7F6E;&#x79C1;&#x6709;&#x4ED3;&#x5E93;&#x548C;gitlab">&#x914D;&#x7F6E;&#x79C1;&#x6709;&#x4ED3;&#x5E93;&#x548C;gitlab</h4>
-<pre><code>docker run -d --network=host --restart=always -p 5000:5000 -v /mnt/registry:/var/lib/registry registry
-</code></pre>
+</code></pre><h4 id="&#x914D;&#x7F6E;&#x79C1;&#x6709;&#x4ED3;&#x5E93;&#x548C;ingress&#x7EC4;&#x4EF6;">&#x914D;&#x7F6E;&#x79C1;&#x6709;&#x4ED3;&#x5E93;&#x548C;ingress&#x7EC4;&#x4EF6;</h4>
+<pre><code># &#x79C1;&#x6709;&#x4ED3;&#x5E93;
+docker run -d --network=host --restart=always -p 5000:5000 -v /mnt/registry:/var/lib/registry registry
+
+# ingress&#x7EC4;&#x4EF6;&#x53EA;&#x80FD;&#x5728;minikube start&#x7684;&#x65F6;&#x5019;&#x914D;&#x7F6E;&#x4EE3;&#x7406;&#x5B89;&#x88C5;
+export HTTP_PROXY=http://192.168.2.119:10809
+export HTTPS_PROXY=http://192.168.2.119:10809
+export NO_PROXY=localhost,127.0.0.1,192.168.0.1/16,10.96.0.0/12,172.16.0.1/12
+# ingress&#x7EC4;&#x4EF6;minikube start&#x5B89;&#x88C5;&#x597D;&#x540E;&#xFF0C;&#x91CD;&#x7F6E;&#x4E0B;&#x73AF;&#x5883;&#x53D8;&#x91CF;
+export HTTP_PROXY=
+export HTTPS_PROXY=
+export NO_PROXY=
+
+# ingress&#x7EC4;&#x4EF6;&#x5176;&#x4ED6;&#x5B89;&#x88C5;&#x65B9;&#x6848;
+1. &#x7FFB;&#x5899;pull&#x955C;&#x50CF;&#xFF0C;&#x5BFC;&#x51FA;&#x518D;&#x5BFC;&#x5165;&#x5230;minikube&#x73AF;&#x5883;&#xFF1A;https://www.liujiajia.me/2022/5/28/manual-import-image-to-minikube
+2. minikube ssh&#x8FDB;&#x5165;&#xFF0C;&#x627E;&#x5230; /etc/kubernetes/addons/ingress-deploy.yaml
+3. &#x4FEE;&#x6539;&#x6B64;yaml&#x6587;&#x4EF6;&#x53BB;&#x6389;&#x955C;&#x50CF;&#x7684;sha265&#x503C;&#xFF0C;&#x76F4;&#x63A5;kubectl apply
+</code></pre><h4 id="&#x7B80;&#x5355;&#x793A;&#x4F8B;">&#x7B80;&#x5355;&#x793A;&#x4F8B;</h4>
+<p>kubectl create deployment hello-minikube1 --image=192.168.2.120:5000/test/node-server:v1
+kubectl expose deployment hello-minikube1 --type=ClusterIP --port=8080
+kubectl patch configmap tcp-services -n ingress-nginx --patch &apos;{&quot;data&quot;:{&quot;80&quot;:&quot;service/hello-minikube1:8080&quot;}}&apos;</p>
+
                                 
                                 </section>
                             
@@ -353,7 +372,7 @@ alias kubectl=&quot;minikube kubectl --&quot;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"9.minikube相关","level":"1.11","depth":1,"previous":{"title":"8.《凤凰架构》","level":"1.10","depth":1,"path":"docs/fenix-architecture.md","ref":"docs/fenix-architecture.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/minikube.md","mtime":"2023-02-21T02:07:17.636Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-02-21T02:07:40.215Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"9.minikube相关","level":"1.11","depth":1,"previous":{"title":"8.《凤凰架构》","level":"1.10","depth":1,"path":"docs/fenix-architecture.md","ref":"docs/fenix-architecture.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/minikube.md","mtime":"2023-02-21T09:35:16.898Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-02-21T09:35:44.506Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

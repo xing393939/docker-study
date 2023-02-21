@@ -20,7 +20,7 @@ cat /etc/docker/daemon.json
   "registry-mirrors" : [
     "https://tycwa26s.mirror.aliyuncs.com"
   ],
-  "insecure-registries":["http://hub-mirror.c.163.com"],
+  "insecure-registries":["192.168.2.120:5000"],
   "bip": "172.18.0.1/16",
   "dns": ["114.114.114.114", "8.8.8.8"]
 }

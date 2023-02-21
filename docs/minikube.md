@@ -57,7 +57,8 @@ export NO_PROXY=
 ```
 
 #### 简单示例
-kubectl create deployment hello-minikube1 --image=192.168.2.120:5000/test/node-server:v1
-kubectl expose deployment hello-minikube1 --type=ClusterIP --port=8080
-kubectl patch configmap tcp-services -n ingress-nginx --patch '{"data":{"80":"service/hello-minikube1:8080"}}'
-
+```
+kubectl create deployment hello-minikube1 --image=192.168.2.120:5000/test/node-server:v2
+kubectl expose deployment hello-minikube1 --type=ClusterIP --port=8082
+kubectl patch configmap tcp-services -n ingress-nginx --patch '{"data":{"8082":"service/hello-minikube2:8082"}}'
+```

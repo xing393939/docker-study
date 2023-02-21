@@ -4,5 +4,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 && apk update
 RUN apk add busybox-extras && apk add curl
 
+EXPOSE 8082
 ADD app.js /app.js
 ENTRYPOINT ["node", "app.js"]

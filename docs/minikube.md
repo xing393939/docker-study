@@ -62,3 +62,29 @@ kubectl create deployment hello-minikube1 --image=192.168.2.120:5000/test/node-s
 kubectl expose deployment hello-minikube1 --type=ClusterIP --port=8082
 kubectl patch configmap tcp-services -n ingress-nginx --patch '{"data":{"8082":"service/hello-minikube2:8082"}}'
 ```
+
+#### 配置mysql
+```
+docker run -d -e MYSQL_ROOT_PASSWORD=123456 -v /mnt/mysql-conf:/etc/mysql/conf.d -v /mnt/mysql:/var/lib/mysql --network host --name mysql -p 3306:3306 --restart always mysql:5.7.32
+
+# 参考：https://www.cnblogs.com/bianxj/articles/9567370.html
+
+# 配置文件：/mnt/mysql-conf/config-file.cnf
+[mysqld]
+port            = 3306
+gtid_mode=on
+enforce_gtid_consistency=on
+server_id=87
+binlog_format=row
+log-slave-updates=1
+replicate-do-db=gozero
+
+# 操作命令
+stop slave;
+reset slave;
+reset master;
+set @@global.gtid_purged='xxx,
+xxx';
+change master to master_host='xxx.rds.aliyuncs.com', master_port=3306, master_user='xxx', master_password='xxx', master_auto_position=1;
+start slave;
+```

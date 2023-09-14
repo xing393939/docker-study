@@ -2,7 +2,7 @@
 
 #### 参考资料
 1. [中国区AWS价格计算器](https://cloud.engineerdraft.com/ec2)，按月计算，也计算了预留实例
-1. [1.23版本yaml文件字段文档](https://v1-23.docs.kubernetes.io/docs/reference/kubernetes-api/)
+1. [yaml文件字段文档](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/)
 
 #### k8s需要解决的问题
 1. pod如何访问外网：[借助宿主机的DNAT和SNAT](https://time.geekbang.org/column/article/11465)

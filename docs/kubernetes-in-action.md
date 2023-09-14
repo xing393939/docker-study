@@ -96,7 +96,7 @@
   1. 每个容器请求的cpu和内存的使用量
   1. 每个容器可以使用的cpu和内存的限制
   1. pod的标签、注解
-1. /api/v1/namespaces/<namespace>/pods
+1. /api/v1/namespaces/{namespace}/pods
 
 #### 章节9，deployment
 1. replicaController的两个问题：在滚动升级时，是靠客户端多次发指令完成的；只能删一个pod增加一个pod

@@ -14,7 +14,6 @@
 - svc：service
 - ing：ingress
 - ns：namespaces
-- rc：replicaController，类似replicaSets，已过时
 - rs：replicaSets，维护和监控pod
 - ds：daemonSets，一个节点一个pod
 - pv：persistentVolumes，持久卷

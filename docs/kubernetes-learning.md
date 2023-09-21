@@ -4,12 +4,12 @@
 1. [kubernetes handbook](https://jimmysong.io/kubernetes-handbook/concepts/objects.html)，k8s的资源对象
 1. [kubernetes ingress+traefik](http://www.showerlee.com/archives/2701)
 1. [k3s 配置 traefik web-ui](https://www.jianshu.com/p/0040e8bd6d1e)
-1. [以图形化的方式简单介绍 Kubernetes Service](https://blog.csdn.net/qq_36441027/article/details/104209807)
 1. [视频，k3s进阶之路](https://space.bilibili.com/430496045/channel/detail?cid=103026)
 
 #### k8s 四种 service 类型
-1. ClusterIP 是最基础的。
-1. 创建一个 NodePort 类型的 service，Kubernetes 会创建 ClusterIP。
+1. [以图形化的方式简单介绍 Kubernetes Service](https://blog.csdn.net/qq_36441027/article/details/104209807)
+1. ClusterIP 是最基础的。集群内部可见。
+1. 创建一个 NodePort 类型的 service，Kubernetes 会创建 ClusterIP。外部可见。
 1. 创建一个 LoadBalance 类型的 service，Kubernetes 会创建 NodePort、ClusterIP。
 1. ExternalName 类型不常用
 

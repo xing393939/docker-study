@@ -1,7 +1,7 @@
 ### 《Kubernetes 深入剖析》
 
 #### 第2章 容器技术基础
-* 进程隔离：利用Namespace：PID、Mount、IPC、Network、User、UTS(使每个Namespace有自己的hostname)
+* 进程隔离：利用Namespace：PID、Mount、IPC、Network、User、UTS(自定义hostname)
 * 资源限制：利用Cgroups：CPU、内存、块设备I/O、带宽
 * 文件系统：利用rootfs
 * 分层镜像：利用UnionFS

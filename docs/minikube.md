@@ -42,8 +42,8 @@ alias kubectl="minikube kubectl --"
 docker run -d --network=host --restart=always -p 5000:5000 -v /mnt/registry:/var/lib/registry registry
 
 # ingress组件只能在minikube start的时候配置代理安装
-export HTTP_PROXY=http://192.168.2.119:10809
-export HTTPS_PROXY=http://192.168.2.119:10809
+export HTTP_PROXY=http://192.168.3.119:10809
+export HTTPS_PROXY=http://192.168.3.119:10809
 export NO_PROXY=localhost,127.0.0.1,192.168.0.1/16,10.96.0.0/12,172.16.0.1/12
 # ingress组件minikube start安装好后，重置下环境变量
 export HTTP_PROXY=
